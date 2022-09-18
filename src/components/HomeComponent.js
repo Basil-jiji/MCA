@@ -44,7 +44,6 @@ const Home = (props) => {
   }) 
 
 
-
 return(
   <>
   <div className="container">

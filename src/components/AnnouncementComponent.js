@@ -14,7 +14,7 @@ import { Link } from 'react-router-dom';
 //Normal function
 function RenderAnnouncementItem({ announcement, onClick }){
   return(
-    <Card>
+    <Card className="text-center">
       <Link to={`/announcements/${announcement.id}`}> 
       <CardBody>{announcement.title}</CardBody>
     </Link>
@@ -27,7 +27,7 @@ function RenderAnnouncementItem({ announcement, onClick }){
   const Announcement = (props) => {
     const announce = props.announcement.map((announcement) => {
       return (
-        <div key={announcement.id} className="col-12 col-md-5 m-1">
+        <div key={announcement.id} className="col-12 col-md-12 m-1">
           <RenderAnnouncementItem announcement={announcement} />
         </div>
       );

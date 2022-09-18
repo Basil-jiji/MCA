@@ -6,11 +6,22 @@ import { Link } from 'react-router-dom';
 function RenderAnnouncement({announcement}){
     if (announcement != null){
         return(
-            <div className="col-12 col-md-5 m-1">
+            <div className="col-12 col-md-12 m-3">
                 <Card>
                     <CardBody>
-                        <CardTitle>{announcement.title}</CardTitle>
-                        <CardText>{announcement.message}</CardText>
+                        <CardTitle><h5>{announcement.title}</h5></CardTitle>
+                        <CardText className="text-center">{announcement.message}
+                        </CardText>
+                        <CardText className="text-right text-muted small">
+                            <p>
+                                &nbsp;
+                                {new Intl.DateTimeFormat('en-US', {
+                                    year: 'numeric',
+                                    month: 'long',
+                                    day: '2-digit'
+                                }).format(new Date(announcement.date))}
+                            </p>
+                        </CardText>
                     </CardBody>
                 </Card>
             </div>
