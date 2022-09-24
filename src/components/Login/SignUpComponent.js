@@ -1,19 +1,18 @@
 import React, { Component } from "react";
-import { NavItem, TabContent, Col, TabPane } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import {
+  Col,
+  Row,
   Card,
   CardBody,
   CardTitle,
   Nav,
-  Form,
-  FormGroup,
   Label,
-  Input,
-  Button,
+  NavItem
 } from "reactstrap";
 import Student from "./StudentSignUpComponent";
 import Staff from "./StaffSignUpComponent";
+import { Control } from "react-redux-form";
 
 
 class SignUp extends Component {
@@ -40,8 +39,8 @@ class SignUp extends Component {
           </div>
         </div>
         <div className="container">
-          <div className="row">
-            <div className="col">
+          <div className="row row-content">
+            <div className="col-12">
               <Card>
                 <CardBody>
                   <CardTitle>
@@ -68,16 +67,16 @@ class SignUp extends Component {
                       </NavItem>
                     </Nav>
                   </CardTitle>
-                        <FormGroup>
-                          <Label htmlFor="accountType" md={12}>
+                  <div className="col" >
+                  <Row className="form-group">
+                          <Label htmlFor="accountType" md={2}>
                             Account Type
                           </Label>
-                          <Col md={12}>
-                            <Input
-                              type="select"
-                              className="form-select"
-                              id="accountType"
-                              name="role"
+                          <Col md={10}>
+                            <Control.select
+                              model=".accountType"
+                              className="form-control"
+                              name="accountType"
                               onChange={this.selectAccountType}
                               innerRef={(input) => (this.role = input)}
                             >
@@ -85,17 +84,17 @@ class SignUp extends Component {
                                 Student
                               </option>
                               <option value="staff">Staff</option>
-                            </Input>
+                            </Control.select>
                           </Col>
-                        </FormGroup>
-                        <FormGroup>
-                          <div className="form-group">
+                        </Row>
+                        <Row className="form-group">
                           {this.state.accountType == "staff" ? <Staff /> : null}
                           {this.state.accountType == "student" ? (
                             <Student />
                           ) : null}
-                        </div>
-                        </FormGroup>
+                        </Row>
+                  </div>
+                        
                 </CardBody>
               </Card>
             </div>

@@ -13,26 +13,31 @@ const minLength = (len) => (val) => (val) && (val.length >= len);
 const isNumber = (val) => !isNaN(Number(val));
 const validEmail = (val) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
 
-class Student extends Component{
+class Prayaana extends Component{
     constructor(props){
         super(props);
-        this.state = {
+        this.state={
 
-        }
-        this.handleStudentLogin = this.handleStudentLogin.bind(this);
+        }   
+        this.handleSubmit= this.handleSubmit.bind(this);
     }
 
-    handleStudentLogin(values){
+    handleSubmit(values){
         console.log("Current State is : " + JSON.stringify(values));
         alert("Current State is : " + JSON.stringify(values));
     }
 
     render(){
-        return (
+        return(
             <div className="container">
-              <div className="row row-content">
-                <div className="col-12">
-                  <LocalForm onSubmit={(values) => this.handleStudentLogin(values)}>
+                <div className="row row-content">
+                    <div className="col">      
+                        <h3>Prayaana</h3>
+                    </div>
+                    <div className="container">
+                        <div className="row row-content">
+                            <div className="col-12">
+                            <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
                     <Row className="form-group">
                       <Label htmlFor="firstname" md={2}>First Name</Label>
                       <Col md={10}>
@@ -66,6 +71,22 @@ class Student extends Component{
                       </Col>
                     </Row>
                     <Row className="form-group">
+                      <Label htmlFor="course" md={2}>Course</Label>
+                      <Col md={10}>
+                      <Control.text model=".course" id="course" name="course" placeholder="Course" className="form-control" 
+                      validators={{
+                                    required, minLength: minLength(3), maxLength: maxLength(45)
+                                  }}/>
+                                  <Errors 
+                                  className="text-danger" model=".course" show="touched" 
+                                  messages={{
+                                    required: 'Required ',
+                                    minLength: 'Must be greater than 2 characters',
+                                    maxLength: 'Must be 45 characters or less'
+                                }} />
+                      </Col>
+                    </Row>
+                    <Row className="form-group">
                           <Label htmlFor="registerNumber" md={2} >Reg Number</Label>
                           <Col md={{size:6, offset:0}}>
                             <Control.text model=".registerNumber" id="registerNumber" name="registerNumber" placeholder="Register Number" className="form-control" 
@@ -88,6 +109,63 @@ class Student extends Component{
                         <option>2023-2025</option>
                       </Control.select>
                       </Col>
+                    </Row>
+                    <Row className="form-group">
+                      <Label htmlFor="collegeName" md={2}>College Name</Label>
+                      <Col md={10}>
+                      <Control.text model=".collegeName" id="collegeName" name="collegeName" placeholder="College Name" className="form-control" 
+                      validators={{
+                                    required, minLength: minLength(3), maxLength: maxLength(15)
+                                  }}/>
+                                  <Errors 
+                                  className="text-danger" model=".collegeName" show="touched" 
+                                  messages={{
+                                    required: 'Required ',
+                                    minLength: 'Must be greater than 2 characters',
+                                    maxLength: 'Must be 15 characters or less'
+                                }} />
+                      </Col>
+                    </Row>
+                    <Row className="form-group">
+                        <Label htmlFor="events" md={2} check>Events</Label>
+                        <Col md={10}>
+                        <div className="form-check form-check-inline">
+                            <Control.checkbox model=".coding"
+                            type="radio"
+                            name="coding"
+                            className="form-check-input form-check-inline"
+                            />
+                            {' '}
+                            Coding
+                            </div>
+                            <div className="form-check form-check-inline">
+                            <Control.checkbox model=".quiz"
+                            type="radio"
+                            name="quiz"
+                            className="form-check-input"
+                            />
+                            {' '}
+                            Quiz
+                            </div>
+                            <div className="form-check form-check-inline">
+                            <Control.checkbox model=".gaming"
+                            type="radio"
+                            name="gaming"
+                            className="form-check-input"
+                            />
+                            {' '}
+                            Gaming
+                            </div>
+                            <div className="form-check form-check-inline">
+                            <Control.checkbox model=".treasure"
+                            type="radio"
+                            name="treasure"
+                            className="form-check-input"
+                            />
+                            {' '}
+                            Treasure Hunt
+                            </div>
+                        </Col>
                     </Row>
                     <Row className="form-group">
                         <Label htmlFor="email" md={2}> Email</Label>
@@ -121,17 +199,19 @@ class Student extends Component{
                     <Row className="form-group">
                         <Col md={{size:10, offset:2}}>
                             <Button type="submit"value="submit" color="primary">
-                                SignUp
+                                Register
                             </Button>
                         </Col>
                     </Row>
+
                   </LocalForm>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          );
+        )
     }
- 
 }
 
-export default Student;
+export default Prayaana;

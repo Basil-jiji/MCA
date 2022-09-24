@@ -11,6 +11,7 @@ import PostDetail from "./Mainpages/PostDetailComponent";
 import Login from "./Login/LoginComponent";
 import SignUp from "./Login/SignUpComponent";
 import Admin from "./Admin/AdminComponent";
+import Prayaana from "./Prayaana/PrayaanaComponent";
 import { connect } from "react-redux";
 
 const mapStateToProps = state =>{
@@ -63,6 +64,7 @@ class Main extends Component{
             <Route exact path="/contactus" component={Contact} />
             <Route exact path="/login" component={() => <Login />} />
             <Route exact path="/signup" component={() => <SignUp />} />
+            <Route exact path="/prayaana" component={() => <Prayaana />} />
             <Route exact path="/devadmin123" component={() => <Admin />} />
             <Redirect to="/home" />
           </Switch>

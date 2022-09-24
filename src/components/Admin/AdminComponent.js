@@ -6,7 +6,13 @@ class Admin extends Component{
     }
     render(){
         return(
-            <h3>This a Admin Page</h3>
+            <div className="container">
+                <div className="row row-content">
+                    <div className="col-12"> 
+                        <h3>This a Admin Page</h3>
+                    </div>
+                </div>
+            </div>
         )
     }
 }

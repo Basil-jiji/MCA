@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { Navbar, NavbarBrand, NavItem, NavbarToggler, Nav, Collapse, Button, Modal, ModalBody,ModalHeader, Form, FormGroup, Input, Label, Col } from "reactstrap";
+import { Navbar, NavbarBrand, NavItem, NavbarToggler, Nav, Collapse, Button, } from "reactstrap";
 import { NavLink } from 'react-router-dom';
-import Login from "../Login/LoginComponent";
+import Prayaana from "../Prayaana/PrayaanaComponent";
 
 
 class Header extends Component{
@@ -10,12 +10,8 @@ class Header extends Component{
         super(props);
             this.state = {
                 isNavOpen: false,
-                isModalOpen: false,
-                isSignInModalOpen: false
             };
             this.toggleNav = this.toggleNav.bind(this);
-            this.toggleModal = this.toggleModal.bind(this);
-            this.handleLogin = this.handleLogin.bind(this);
     }
 
     toggleNav(){
@@ -24,17 +20,6 @@ class Header extends Component{
         })
     }
 
-    toggleModal(){
-        this.setState({
-            isModalOpen: !this.state.isModalOpen
-        })
-    }
-
-    handleLogin(event){
-        this.toggleModal();
-        alert("Username :" + this.username.value + " Password: " + this.password.value + " Remember: " + this.remember.checked)
-        event.preventDefault();
-    }
 
     render(){
         return(
@@ -67,7 +52,8 @@ class Header extends Component{
                         </NavItem>
                     </Nav>
                     <Nav className="ml-auto" navbar>
-                    <Button outline color="danger" onClick={this.toggleModal}><span className='fa'></span> Prayaana </Button>
+                    <Button outline color="success"  href="/prayaana"><span className='fa'></span> Prayaana</Button>
+                   
                     <NavItem>
                             <NavLink className="nav-link" to="/login">
                                 <span className="fa fa-sign-in fa-lg"></span> Login

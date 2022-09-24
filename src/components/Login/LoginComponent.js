@@ -1,17 +1,21 @@
 import React, { Component } from "react";
-import { NavItem, TabContent, TabPane } from "react-bootstrap";
+import {Control, LocalForm, Errors } from "react-redux-form";
 import { NavLink } from "react-router-dom";
 import {
+  Row,
+  Col,
   Card,
   CardBody,
   CardTitle,
   Nav,
-  Form,
   FormGroup,
   Label,
   Input,
   Button,
+  NavItem
 } from "reactstrap";
+
+const required = (val) => val && val.length;
 
 class Login extends Component {
   constructor(props) {
@@ -39,10 +43,11 @@ class Login extends Component {
     })
   }
 
-  handleLogin(event){
-    alert("Username :" + this.username.value + " Password: " + this.password.value + " Remember: " + this.remember.checked)
-    event.preventDefault();
-}
+  handleLogin(values){
+    console.log("Current State is : " + JSON.stringify(values));
+    alert("Current State is : " + JSON.stringify(values));
+
+    }
 
   render() {
     return (
@@ -53,8 +58,8 @@ class Login extends Component {
               <h3>Login</h3>
             </div>
             <div className="container">
-              <div className="row">
-                <div className="col">
+              <div className="row row-content">
+                <div className="col-12">
                   <Card>
                     <CardBody>
                       <CardTitle>
@@ -71,39 +76,69 @@ class Login extends Component {
                           </NavItem>
                         </Nav>
                       </CardTitle>
-                        <Form onSubmit={this.handleLogin}>
-                        <FormGroup>
-                          <Label htmlFor="username">Username</Label>
-                          <Input
-                            type="text"
+
+                      {/* Login Form Starts from here */}
+
+                        <LocalForm onSubmit={this.handleLogin}>
+                        <Row className="form-group">
+                          <Label htmlFor="username" md={2}>Username</Label>
+                          <Col md={12}>
+                          <Control.text
+                            model=".username"
                             id="username"
                             name="username"
-                            innerRef={(input) => (this.username = input)}
+                            placeholder="Username"
+                            className="form-control"
+                            validators={{required}}
                           />
-                        </FormGroup>
-                        <FormGroup>
-                          <Label htmlFor="password">Password</Label>
-                          <Input
-                            type="text"
+                          <Errors className="text-danger" model=".username" show="touched" 
+                              messages={{
+                                required: 'Required '
+                            }} />
+                          </Col>
+                        </Row>
+
+                        <Row className="form-group">
+                          <Label htmlFor="password" md={2}>Password</Label>
+                          <Col md={12}>
+                          <Control.text
+                            type="password"
+                            model=".password"
                             id="password"
                             name="password"
-                            innerRef={(input) => (this.password = input)}
+                            placeholder="Password"
+                            className="form-control"
+                            validators={{required}}
                           />
-                        </FormGroup>
-                        <FormGroup check>
-                          <Label check>
-                            <Input
-                              type="checkbox"
+                          <Errors className="text-danger" model=".password" show="touched" 
+                              messages={{
+                                required: 'Required'
+                            }} />
+                          </Col>
+                        </Row>
+
+                        <Row className="form-group">
+                          <Col md={12}>
+                            <div className="form-check">
+                            <Label check>
+                            <Control.checkbox model=".remember"
                               name="remember"
-                              innerRef={(input) => (this.remember = input)}
+                              className="form-check-input"
                             />
+                            {' '}
                             Remember Me
                           </Label>
-                        </FormGroup>
-                        <Button type="submit" value="submit" color="primary">
-                          Login
-                        </Button>
-                      </Form>
+                            </div>
+                          </Col>
+                        </Row>
+                        <Row className="form-group">
+                        <Col md={2}>
+                            <Button type="submit"value="submit" color="primary">
+                                Login
+                            </Button>
+                        </Col>
+                    </Row>
+                      </LocalForm>
                     </CardBody>
                   </Card>
                 </div>
