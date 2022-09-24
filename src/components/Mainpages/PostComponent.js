@@ -24,7 +24,7 @@ const Post = (props) => {
     return(
         <div className="container">
             <div className="row">
-                <Breadcrumb>
+                <Breadcrumb className="m-1">
                     <BreadcrumbItem><Link to="/home">Home</Link></BreadcrumbItem>
                     <BreadcrumbItem active>Posts</BreadcrumbItem>
                 </Breadcrumb>

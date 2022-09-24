@@ -46,7 +46,7 @@ const AnnouncementDetail = (props) => {
     return(
         <div className="container">
             <div className="row">
-                <Breadcrumb>
+                <Breadcrumb className="m-1">
                     <BreadcrumbItem>
                         <Link to="/announcements">Announcements</Link>
                     </BreadcrumbItem>

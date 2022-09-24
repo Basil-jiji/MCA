@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import { Navbar, NavbarBrand, NavItem, NavbarToggler, Nav, Collapse, Button, Modal, ModalBody,ModalHeader, Form, FormGroup, Input, Label } from "reactstrap";
+import { Navbar, NavbarBrand, NavItem, NavbarToggler, Nav, Collapse, Button, Modal, ModalBody,ModalHeader, Form, FormGroup, Input, Label, Col } from "reactstrap";
 import { NavLink } from 'react-router-dom';
+import Login from "../Login/LoginComponent";
+
 
 class Header extends Component{
 
@@ -8,7 +10,8 @@ class Header extends Component{
         super(props);
             this.state = {
                 isNavOpen: false,
-                isModal: false
+                isModalOpen: false,
+                isSignInModalOpen: false
             };
             this.toggleNav = this.toggleNav.bind(this);
             this.toggleModal = this.toggleModal.bind(this);
@@ -64,54 +67,16 @@ class Header extends Component{
                         </NavItem>
                     </Nav>
                     <Nav className="ml-auto" navbar>
-                        <NavItem>
-                            <Button outline onClick={this.toggleModal}><span className='fa fa-sign-in fa-lg'></span> Login </Button>
-                        </NavItem>
+                    <Button outline color="danger" onClick={this.toggleModal}><span className='fa'></span> Prayaana </Button>
+                    <NavItem>
+                            <NavLink className="nav-link" to="/login">
+                                <span className="fa fa-sign-in fa-lg"></span> Login
+                            </NavLink>
+                        </NavItem>                        
                     </Nav>
                 </Collapse>
             </div>
         </Navbar>
-
-        <div className="jumbotron">
-            <div className="container">
-                <div className="row row-header">
-                    <div className="col-12 col-sm-6">
-                        <h1>Master of Computer Application</h1>
-                        <p>
-                            Master of Computer Application is the best course in Nehru College of Engineering and Research Centre.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
-                <Nav>
-                    <NavItem>
-                <ModalHeader toggle={this.toggleModal}>Login</ModalHeader>
-                <ModalBody>
-                    <Form onSubmit={this.handleLogin}>
-                        <FormGroup>
-                            <Label htmlFor="username">Username</Label>
-                            <Input type="text" id="username" name="username" innerRef={(input) => this.username = input} />
-                        </FormGroup>
-                        <FormGroup>
-                            <Label htmlFor="password">Password</Label>
-                            <Input type="text" id="password" name="password" innerRef={(input) => this.password = input} />
-                        </FormGroup>
-                        <FormGroup check>
-                            <Label check>
-                            <Input type="checkbox" name="remember" innerRef={(input) => this.remember = input} />
-                            Remember Me
-                            </Label>
-                        </FormGroup>
-                        <Button type="submit" value="submit" color="primary">Login</Button>
-                    </Form>
-                </ModalBody>
-                </NavItem>
-                <NavItem></NavItem>
-                </Nav>
-            </Modal>
-        </div>
-
             </>
         )
     }

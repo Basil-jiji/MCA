@@ -1,13 +1,16 @@
 import React, { Component } from "react";
-import { Switch, Route, useParams, withRouter, Redirect } from 'react-router-dom';
-import Header from "./HeaderComponent";
-import Home from "./HomeComponent";
-import Footer from "./FooterComponent";
-import Contact from "./ContactComponent";
-import Announcement from "./AnnouncementComponent";
-import AnnouncementDetail from "./AnnouncementDetailComponent";
-import Post from "./PostComponent";
-import PostDetail from "./PostDetailComponent";
+import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
+import Header from "./Mainpages/HeaderComponent";
+import Home from "./Mainpages/HomeComponent";
+import Footer from "./Mainpages/FooterComponent";
+import Contact from "./Mainpages/ContactComponent";
+import Announcement from "./Mainpages/AnnouncementComponent";
+import AnnouncementDetail from "./Mainpages/AnnouncementDetailComponent";
+import Post from "./Mainpages/PostComponent";
+import PostDetail from "./Mainpages/PostDetailComponent";
+import Login from "./Login/LoginComponent";
+import SignUp from "./Login/SignUpComponent";
+import Admin from "./Admin/AdminComponent";
 import { connect } from "react-redux";
 
 const mapStateToProps = state =>{
@@ -58,6 +61,10 @@ class Main extends Component{
             <Route exact path="/posts" component={() => <Post post={this.props.posts} />} />
             <Route path="/posts/:postId" component={PostWithId} />
             <Route exact path="/contactus" component={Contact} />
+            <Route exact path="/login" component={() => <Login />} />
+            <Route exact path="/signup" component={() => <SignUp />} />
+            <Route exact path="/devadmin123" component={() => <Admin />} />
+            <Redirect to="/home" />
           </Switch>
           
           <Footer />

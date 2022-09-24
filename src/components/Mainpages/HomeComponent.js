@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardImg, CardText, CardBody, CardTitle } from "reactstrap";
+import { Card, CardImg, CardText, CardBody, CardTitle, Jumbotron } from "reactstrap";
 
 
 function RenderTopperItem({top}){
@@ -46,6 +46,18 @@ const Home = (props) => {
 
 return(
   <>
+  <div className="jumbotron">
+    <div className="container">
+        <div className="row row-header">
+            <div className="col-12 col-sm-6">
+                <h1>Master of Computer Application</h1>
+                    <p>
+                      Master of Computer Application is the best course in Nehru College of Engineering and Research Centre.
+                    </p>
+              </div>
+            </div>
+          </div>
+        </div>
   <div className="container">
     <h3>TOPPERS</h3>
     <hr />
