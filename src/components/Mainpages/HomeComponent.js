@@ -4,7 +4,6 @@ import { Card, CardImg, CardText, CardBody, CardTitle, Jumbotron } from "reactst
 
 function RenderTopperItem({top}){
   return(
-
           <Card>
             <CardImg src={top.image} alt={top.name} />
             <CardBody>
@@ -12,8 +11,6 @@ function RenderTopperItem({top}){
             <CardText>{top.score}</CardText>
             </CardBody>
           </Card>
-
-
   )
 }
 

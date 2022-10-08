@@ -7,12 +7,12 @@ import Contact from "./Mainpages/ContactComponent";
 import Announcement from "./Mainpages/AnnouncementComponent";
 import AnnouncementDetail from "./Mainpages/AnnouncementDetailComponent";
 import Post from "./Mainpages/PostComponent";
-import PostDetail from "./Mainpages/PostDetailComponent";
 import SignUp from "./Login/SignUpComponent";
 import Prayaana from "./Prayaana/PrayaanaComponent";
 import { connect } from "react-redux";
 import Admin from './Admin/AdminRouteComponent'
 import LoginMain from "./Login/LoginMainComponent";
+import Pizada from "./Pizada/PizadaComponent";
 
 const mapStateToProps = state =>{
   return{
@@ -46,12 +46,6 @@ class Main extends Component{
       )
     }
 
-    const PostWithId = ({match}) =>{
-      return(
-        <PostDetail post = {this.props.posts.filter((post) => post.id === parseInt((match.params.postId), 10))[0]} />
-      )
-    }
-
     return (
       <div className="App">
           <Header />
@@ -60,11 +54,11 @@ class Main extends Component{
             <Route exact path="/announcements" component={() => <Announcement announcement={this.props.announcements}/>} />
             <Route path="/announcements/:announcementId" component={AnnouncementWithId} />
             <Route exact path="/posts" component={() => <Post post={this.props.posts} />} />
-            <Route path="/posts/:postId" component={PostWithId} />
             <Route exact path="/contactus" component={Contact} />
             <Route exact path="/login" component={() => <LoginMain />} />
             <Route exact path="/signup" component={() => <SignUp />} />
             <Route exact path="/prayaana" component={() => <Prayaana />} />
+            <Route exact path="/pizada" component={() => <Pizada />} />
             <Route path="/admin" component={() => <Admin/>} />
             <Redirect to="/home" />
           </Switch>

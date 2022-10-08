@@ -1,16 +1,24 @@
 import React from "react";
-import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardTitle, CardText } from 'reactstrap';
+import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardTitle, CardText, CardHeader, CardImg, CardFooter } from 'reactstrap';
 import { Link } from 'react-router-dom'
 
 function RenderPostItem({post}){
     return(
         <Card>
-            <Link to={`/posts/${post.id}`}>
-                <CardBody>
-                <CardTitle>{post.name}</CardTitle>
-                <CardText className="text-center">{post.description}</CardText>
-                </CardBody>
-            </Link>
+            <CardHeader><h6>{post.name}</h6></CardHeader>
+            {post.image ? <CardImg src={post.image} width="100%" height="250px"/> : null}
+                    <CardBody>
+                        <CardText>{post.content}
+                        </CardText>
+                    </CardBody>
+                    <CardFooter className="text-right text-muted small"><p>
+                        &nbsp;
+                        {new Intl.DateTimeFormat('en-US', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: '2-digit'
+                        }).format(new Date(post.date))}
+                    </p></CardFooter>
         </Card>
     )
 }
@@ -18,9 +26,10 @@ function RenderPostItem({post}){
 const Post = (props) => {
     const post = props.post.map((post)=>{
         return(
-            <div key={post.id} className="col-12 col-md-12 m-1">
+                <div key={post.id} className="col-6 m-3">
                 <RenderPostItem post={post}/>
             </div>
+
         )
     });
 
@@ -36,7 +45,10 @@ const Post = (props) => {
                     <hr />
                 </div>
             </div>
-            <div className="row">{post}</div>
+            <div className="col">
+            {post}
+            </div>
+            
         </div>
     )
 }
