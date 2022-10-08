@@ -1,17 +1,12 @@
 import React from "react";
 import {
   Card,
-  CardImg,
-  CardImgOverlay,
-  CardTitle,
   Breadcrumb,
   BreadcrumbItem,
-  CardBody
+  CardBody,
 } from "reactstrap";
 import { Link } from 'react-router-dom';
 
-
-//Normal function
 function RenderAnnouncementItem({ announcement, onClick }){
   return(
     <Card className="text-center">

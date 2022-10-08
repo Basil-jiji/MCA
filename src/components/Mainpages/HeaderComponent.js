@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Navbar, NavbarBrand, NavItem, NavbarToggler, Nav, Collapse, Button, } from "reactstrap";
 import { NavLink } from 'react-router-dom';
-import Prayaana from "../Prayaana/PrayaanaComponent";
 
 
 class Header extends Component{

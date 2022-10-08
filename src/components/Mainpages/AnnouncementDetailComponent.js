@@ -1,11 +1,13 @@
 import React from "react";
-import { Card, CardImg, CardImgOverlay, CardTitle, Breadcrumb, BreadcrumbItem, CardBody, CardText } from "reactstrap";
+import { Card, CardTitle, Breadcrumb, BreadcrumbItem, CardBody, CardText } from "reactstrap";
 import { Link } from 'react-router-dom';
 
 
 function RenderAnnouncement({announcement}){
     if (announcement != null){
         return(
+            <div className="container">
+            <div className="row-content">
             <div className="col-12 col-md-12 m-3">
                 <Card>
                     <CardBody>
@@ -24,6 +26,8 @@ function RenderAnnouncement({announcement}){
                         </CardText>
                     </CardBody>
                 </Card>
+            </div>
+            </div>
             </div>
         );
     }

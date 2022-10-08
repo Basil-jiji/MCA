@@ -114,6 +114,42 @@ class Staff extends Component {
                       </Col>
                 </Row>
                 <Row className="form-group">
+                          <Label htmlFor="enterpassword" md={2}>Enter Password</Label>
+                          <Col md={10}>
+                          <Control.text
+                            type="password"
+                            model=".enterpassword"
+                            id="enterpassword"
+                            name="enterpassword"
+                            placeholder="Enter Password"
+                            className="form-control"
+                            validators={{required}}
+                          />
+                          <Errors className="text-danger" model=".enterpassword" show="touched" 
+                              messages={{
+                                required: 'Required'
+                            }} />
+                          </Col>
+                        </Row>
+                        <Row className="form-group">
+                          <Label htmlFor="confirmpassword" md={2}>Confirm Password</Label>
+                          <Col md={10}>
+                          <Control.text
+                            type="password"
+                            model=".confirmpassword"
+                            id="confirmpassword"
+                            name="confirmpassword"
+                            placeholder="Confirm Password"
+                            className="form-control"
+                            validators={{required}}
+                          />
+                          <Errors className="text-danger" model=".confirmpassword" show="touched" 
+                              messages={{
+                                required: 'Required'
+                            }} />
+                          </Col>
+                        </Row>
+                <Row className="form-group">
                         <Col md={{size:10, offset:2}}>
                             <Button type="submit"value="submit" color="primary">
                                 SignUp

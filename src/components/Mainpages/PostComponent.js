@@ -1,12 +1,15 @@
 import React from "react";
-import { Breadcrumb, BreadcrumbItem, Card, CardBody, } from 'reactstrap';
+import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardTitle, CardText } from 'reactstrap';
 import { Link } from 'react-router-dom'
 
 function RenderPostItem({post}){
     return(
-        <Card className="text-center">
+        <Card>
             <Link to={`/posts/${post.id}`}>
-                <CardBody>{post.name}</CardBody>
+                <CardBody>
+                <CardTitle>{post.name}</CardTitle>
+                <CardText className="text-center">{post.description}</CardText>
+                </CardBody>
             </Link>
         </Card>
     )

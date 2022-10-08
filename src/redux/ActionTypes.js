@@ -1,0 +1,1 @@
+export const ADD_ANNOUNCEMENT = 'ADD_ANNOUNCEMENT'

@@ -1,14 +1,8 @@
 import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
 import {
   Col,
   Row,
-  Card,
-  CardBody,
-  CardTitle,
-  Nav,
   Label,
-  NavItem
 } from "reactstrap";
 import Student from "./StudentSignUpComponent";
 import Staff from "./StaffSignUpComponent";
@@ -32,41 +26,8 @@ class SignUp extends Component {
     return (
       <>
         <div className="container">
-          <div className="row">
-            <div className="col">
-              <h3>SignUp</h3>
-            </div>
-          </div>
-        </div>
-        <div className="container">
           <div className="row row-content">
             <div className="col-12">
-              <Card>
-                <CardBody>
-                  <CardTitle>
-                    <Nav className="nav-pills nav-fill" id="login">
-                      <NavItem active>
-                        <NavLink
-                          className="nav-link"
-                          onClick={() => this.toggleLogIn}
-                          to="/login"
-                        >
-                          <span className="">Login</span>
-                        </NavLink>
-                      </NavItem>
-                      <NavItem>
-                        <NavLink
-                          className="nav-link"
-                          to="/signup"
-                          onClick={() => this.toggleSignIn}
-                          data-toggle="pill"
-                          href="#pills-signup"
-                        >
-                          <span className="">SignIn</span>
-                        </NavLink>
-                      </NavItem>
-                    </Nav>
-                  </CardTitle>
                   <div className="col" >
                   <Row className="form-group">
                           <Label htmlFor="accountType" md={2}>
@@ -93,10 +54,7 @@ class SignUp extends Component {
                             <Student />
                           ) : null}
                         </Row>
-                  </div>
-                        
-                </CardBody>
-              </Card>
+                  </div>       
             </div>
           </div>
         </div>

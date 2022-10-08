@@ -1,18 +1,10 @@
 import React, { Component } from "react";
-import {Control, LocalForm, Errors } from "react-redux-form";
-import { NavLink } from "react-router-dom";
+import { Control, LocalForm, Errors } from "react-redux-form";
 import {
   Row,
   Col,
-  Card,
-  CardBody,
-  CardTitle,
-  Nav,
-  FormGroup,
   Label,
-  Input,
-  Button,
-  NavItem
+  Button
 } from "reactstrap";
 
 const required = (val) => val && val.length;
@@ -21,61 +13,17 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        isSignInTabOpen : false,
-        isLoginTabOpen : false
+
     };
-    this.toggleLogIn = this.toggleLogIn.bind(this);
-    this.toggleSignIn = this.toggleSignIn.bind(this);
-    this.handleLogin = this.handleLogin.bind(this);
-  }
+  } 
 
-  toggleSignIn(){
-    this.setState({
-        isSignInTabOpen: !this.state.isSignInTabOpen,
-        isLoginTabOpen: this.state.isLoginTabOpen
-    })
-  }
-  
-  toggleLogIn(){
-    this.setState({
-        isLoginTabOpen: !this.state.isLoginTabOpen,
-        isSignInTabOpen: this.state.isSignInTabOpen
-    })
-  }
-
-  handleLogin(values){
-    console.log("Current State is : " + JSON.stringify(values));
-    alert("Current State is : " + JSON.stringify(values));
-
-    }
 
   render() {
     return (
       <>
-        <div className="container">
-          <div className="row">
-            <div className="col">
-              <h3>Login</h3>
-            </div>
             <div className="container">
               <div className="row row-content">
                 <div className="col-12">
-                  <Card>
-                    <CardBody>
-                      <CardTitle>
-                        <Nav className="nav-pills nav-fill" id="login">
-                          <NavItem active>
-                            <NavLink className="nav-link" to="/login" onClick={()=> this.toggleLogIn } >
-                              <span className="">Login</span>
-                            </NavLink>
-                          </NavItem>
-                          <NavItem>
-                            <NavLink className="nav-link" to="/signup" onClick={()=> this.toggleSignIn } data-toggle="pill" >
-                              <span className="">SignIn</span>
-                            </NavLink>
-                          </NavItem>
-                        </Nav>
-                      </CardTitle>
 
                       {/* Login Form Starts from here */}
 
@@ -139,13 +87,9 @@ class Login extends Component {
                         </Col>
                     </Row>
                       </LocalForm>
-                    </CardBody>
-                  </Card>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
       </>
     );
   }

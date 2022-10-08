@@ -8,11 +8,11 @@ import Announcement from "./Mainpages/AnnouncementComponent";
 import AnnouncementDetail from "./Mainpages/AnnouncementDetailComponent";
 import Post from "./Mainpages/PostComponent";
 import PostDetail from "./Mainpages/PostDetailComponent";
-import Login from "./Login/LoginComponent";
 import SignUp from "./Login/SignUpComponent";
-import Admin from "./Admin/AdminComponent";
 import Prayaana from "./Prayaana/PrayaanaComponent";
 import { connect } from "react-redux";
+import Admin from './Admin/AdminRouteComponent'
+import LoginMain from "./Login/LoginMainComponent";
 
 const mapStateToProps = state =>{
   return{
@@ -62,10 +62,10 @@ class Main extends Component{
             <Route exact path="/posts" component={() => <Post post={this.props.posts} />} />
             <Route path="/posts/:postId" component={PostWithId} />
             <Route exact path="/contactus" component={Contact} />
-            <Route exact path="/login" component={() => <Login />} />
+            <Route exact path="/login" component={() => <LoginMain />} />
             <Route exact path="/signup" component={() => <SignUp />} />
             <Route exact path="/prayaana" component={() => <Prayaana />} />
-            <Route exact path="/devadmin123" component={() => <Admin />} />
+            <Route path="/admin" component={() => <Admin/>} />
             <Redirect to="/home" />
           </Switch>
           

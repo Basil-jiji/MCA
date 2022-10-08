@@ -33,6 +33,7 @@ class Prayaana extends Component{
                 <div className="row row-content">
                     <div className="col">      
                         <h3>Prayaana</h3>
+                        <hr />
                     </div>
                     <div className="container">
                         <div className="row row-content">
@@ -127,11 +128,11 @@ class Prayaana extends Component{
                       </Col>
                     </Row>
                     <Row className="form-group">
-                        <Label htmlFor="events" md={2} check>Events</Label>
+                        <Label htmlFor="events" md={2}>Events</Label>
                         <Col md={10}>
                         <div className="form-check form-check-inline">
                             <Control.checkbox model=".coding"
-                            type="radio"
+                            type="checkbox"
                             name="coding"
                             className="form-check-input form-check-inline"
                             />
@@ -140,7 +141,7 @@ class Prayaana extends Component{
                             </div>
                             <div className="form-check form-check-inline">
                             <Control.checkbox model=".quiz"
-                            type="radio"
+                            type="checkbox"
                             name="quiz"
                             className="form-check-input"
                             />
@@ -149,7 +150,7 @@ class Prayaana extends Component{
                             </div>
                             <div className="form-check form-check-inline">
                             <Control.checkbox model=".gaming"
-                            type="radio"
+                            type="checkbox"
                             name="gaming"
                             className="form-check-input"
                             />
@@ -158,7 +159,7 @@ class Prayaana extends Component{
                             </div>
                             <div className="form-check form-check-inline">
                             <Control.checkbox model=".treasure"
-                            type="radio"
+                            type="checkbox"
                             name="treasure"
                             className="form-check-input"
                             />
