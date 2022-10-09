@@ -5,7 +5,6 @@ import Home from "./Mainpages/HomeComponent";
 import Footer from "./Mainpages/FooterComponent";
 import Contact from "./Mainpages/ContactComponent";
 import Announcement from "./Mainpages/AnnouncementComponent";
-import AnnouncementDetail from "./Mainpages/AnnouncementDetailComponent";
 import Post from "./Mainpages/PostComponent";
 import SignUp from "./Login/SignUpComponent";
 import Prayaana from "./Prayaana/PrayaanaComponent";
@@ -39,12 +38,6 @@ class Main extends Component{
       )
     }
 
-    const AnnouncementWithId = ({match}) =>{
-      return(
-        <AnnouncementDetail announcement={this.props.announcements.filter((announcement) => announcement.id === parseInt((match.params.announcementId), 10))[0]}
-        />
-      )
-    }
 
     return (
       <div className="App">
@@ -52,7 +45,6 @@ class Main extends Component{
           <Switch>
             <Route path="/home" component={Homepage} />
             <Route exact path="/announcements" component={() => <Announcement announcement={this.props.announcements}/>} />
-            <Route path="/announcements/:announcementId" component={AnnouncementWithId} />
             <Route exact path="/posts" component={() => <Post post={this.props.posts} />} />
             <Route exact path="/contactus" component={Contact} />
             <Route exact path="/login" component={() => <LoginMain />} />

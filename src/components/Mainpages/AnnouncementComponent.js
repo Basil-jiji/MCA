@@ -4,16 +4,36 @@ import {
   Breadcrumb,
   BreadcrumbItem,
   CardBody,
+  CardText,
+  CardFooter,
+  CardHeader,
+  UncontrolledCollapse
 } from "reactstrap";
 import { Link } from 'react-router-dom';
 
 function RenderAnnouncementItem({ announcement, onClick }){
   return(
-    <Card className="text-center">
-      <Link to={`/announcements/${announcement.id}`}> 
-      <CardBody>{announcement.title}</CardBody>
-    </Link>
-    </Card>
+    <div >
+          <Card>
+            <CardHeader className="text-center btn-link" id="toggler"><h5>{announcement.title}</h5></CardHeader>
+            <UncontrolledCollapse toggler="#toggler">
+            <CardBody>
+                <CardText className="text-center">{announcement.message}
+                  </CardText>
+                    </CardBody>
+                    </UncontrolledCollapse>
+                    <CardFooter className="text-right text-muted small">
+                            <p>
+                                &nbsp;
+                                {new Intl.DateTimeFormat('en-US', {
+                                    year: 'numeric',
+                                    month: 'long',
+                                    day: '2-digit'
+                                }).format(new Date(announcement.date))}
+                            </p>
+                        </CardFooter>
+                </Card>
+                </div>
   );
 
 }

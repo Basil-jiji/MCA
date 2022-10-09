@@ -41,5 +41,14 @@ export const POSTS = [
         description: "Greetings",
         image: '/assets/images/Vishnu.png',
         content: "Hello World"
+    },    
+    {
+        id: 5,
+        name: "Suni",
+        role: "Student",
+        date: "2014-07-05T17:57:28.556094Z",
+        description: "Greetings",
+        image: '/assets/images/Vishnu.png',
+        content: "Hello World"
     }
 ]

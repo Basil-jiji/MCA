@@ -1,5 +1,5 @@
 import React from "react";
-import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardTitle, CardText, CardHeader, CardImg, CardFooter } from 'reactstrap';
+import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardText, CardHeader, CardImg, CardFooter } from 'reactstrap';
 import { Link } from 'react-router-dom'
 
 function RenderPostItem({post}){
