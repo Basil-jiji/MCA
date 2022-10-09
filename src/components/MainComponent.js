@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
+import { actions } from 'react-redux-form';
 import Header from "./Mainpages/HeaderComponent";
 import Home from "./Mainpages/HomeComponent";
 import Footer from "./Mainpages/FooterComponent";
@@ -18,7 +19,8 @@ const matchDispatchToProps = (dispatch) =>({
   addAnnouncement: (title, message) =>
   dispatch(addAnnouncement(title, message)),
   fetchToppers: () => {dispatch(fetchToppers())},
-  fetchPlacements: () => {dispatch(fetchPlacements())}
+  fetchPlacements: () => {dispatch(fetchPlacements())},
+  resetFeedbackForm: () => {dispatch(actions.reset('feedback'))}
 });
 
 const mapStateToProps = state =>{
@@ -66,7 +68,7 @@ class Main extends Component{
             <Route path="/home" component={Homepage} />
             <Route exact path="/announcements" component={() => <Announcement announcement={this.props.announcements} />} />
             <Route exact path="/posts" component={() => <Post post={this.props.posts} />} />
-            <Route exact path="/contactus" component={Contact} />
+            <Route exact path="/contactus" component={() => <Contact resetFeedbackForm={this.props.resetFeedbackForm}/>} />
             <Route exact path="/login" component={() => <LoginMain />} />
             <Route exact path="/signup" component={() => <SignUp />} />
             <Route exact path="/prayaana" component={() => <Prayaana />} />

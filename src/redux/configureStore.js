@@ -1,4 +1,6 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
+import { InitialFeedback } from "./feedback";
+import { createForms } from "react-redux-form";
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import { Placements } from "./placements";
@@ -12,7 +14,10 @@ export const ConfigureStore = () =>{
             placements: Placements,
             toppers: Toppers,
             posts: Posts,
-            announcements: Announcements
+            announcements: Announcements,
+            ...createForms({
+                feedback: InitialFeedback
+            })
         }),
         applyMiddleware(thunk, logger)
     );
