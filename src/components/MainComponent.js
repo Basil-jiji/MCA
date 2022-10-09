@@ -9,9 +9,16 @@ import Post from "./Mainpages/PostComponent";
 import SignUp from "./Login/SignUpComponent";
 import Prayaana from "./Prayaana/PrayaanaComponent";
 import { connect } from "react-redux";
-import Admin from './Admin/AdminRouteComponent'
 import LoginMain from "./Login/LoginMainComponent";
 import Pizada from "./Pizada/PizadaComponent";
+import { addAnnouncement } from "../redux/ActionCreators";
+import NewAnnouncement from "./Admin/NewAnnouncementComponent";
+import Admin from "./Admin/AdminRouteComponent"
+
+const matchDispatchToProps = (dispatch) =>({
+  addAnnouncement: (title, message) =>
+  dispatch(addAnnouncement(title, message))
+});
 
 const mapStateToProps = state =>{
   return{
@@ -23,8 +30,8 @@ const mapStateToProps = state =>{
   }
 }
 
-class Main extends Component{
 
+class Main extends Component{
     constructor(props){
       super(props);
     }
@@ -44,14 +51,15 @@ class Main extends Component{
           <Header />
           <Switch>
             <Route path="/home" component={Homepage} />
-            <Route exact path="/announcements" component={() => <Announcement announcement={this.props.announcements}/>} />
+            <Route exact path="/announcements" component={() => <Announcement announcement={this.props.announcements} />} />
             <Route exact path="/posts" component={() => <Post post={this.props.posts} />} />
             <Route exact path="/contactus" component={Contact} />
             <Route exact path="/login" component={() => <LoginMain />} />
             <Route exact path="/signup" component={() => <SignUp />} />
             <Route exact path="/prayaana" component={() => <Prayaana />} />
             <Route exact path="/pizada" component={() => <Pizada />} />
-            <Route path="/admin" component={() => <Admin/>} />
+            <Route path="/admin" component={() => <Admin addAnnouncement={this.props.addAnnouncement}/>} />
+            
             <Redirect to="/home" />
           </Switch>
           
@@ -61,4 +69,4 @@ class Main extends Component{
 }
 }
 
-export default withRouter(connect(mapStateToProps)(Main));
+export default withRouter(connect(mapStateToProps, matchDispatchToProps)(Main));

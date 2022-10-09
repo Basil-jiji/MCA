@@ -4,8 +4,7 @@ import {
   Col,
   Row,
   Label,
-  Button,
-  NavItem
+  Button
 } from "reactstrap";
 
 const required = (val) => val && val.length;

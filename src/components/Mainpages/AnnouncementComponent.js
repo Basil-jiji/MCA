@@ -5,6 +5,7 @@ import {
   BreadcrumbItem,
   CardBody,
   CardText,
+  CardTitle,
   CardFooter,
   CardHeader,
   UncontrolledCollapse
@@ -13,15 +14,15 @@ import { Link } from 'react-router-dom';
 
 function RenderAnnouncementItem({ announcement, onClick }){
   return(
-    <div >
+    <div>
           <Card>
             <CardHeader className="text-center btn-link" id="toggler"><h5>{announcement.title}</h5></CardHeader>
-            <UncontrolledCollapse toggler="#toggler">
+            {/* <UncontrolledCollapse toggler="#toggler"> */}
             <CardBody>
                 <CardText className="text-center">{announcement.message}
                   </CardText>
                     </CardBody>
-                    </UncontrolledCollapse>
+                    {/* </UncontrolledCollapse> */}
                     <CardFooter className="text-right text-muted small">
                             <p>
                                 &nbsp;

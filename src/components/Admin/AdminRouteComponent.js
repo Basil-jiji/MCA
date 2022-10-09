@@ -1,7 +1,8 @@
-import React, { Component } from "react"
-import { Switch, Route } from "react-router-dom"
-import  Dashboard  from "./AdminDashboardComponent"
-import AdminLogin from "./AdminLoginComponent"
+import React, { Component } from "react";
+import { Switch, Route } from "react-router-dom";
+import  Dashboard  from "./AdminDashboardComponent";
+import AdminLogin from "./AdminLoginComponent";
+import NewAnnouncement from "./NewAnnouncementComponent";
 
 class Admin extends Component{
 
@@ -11,6 +12,7 @@ class Admin extends Component{
             <Switch>
                 <Route path="/admin" exact><AdminLogin/></Route>
                 <Route path="/admin/dashboard" exact><Dashboard /></Route>
+                <Route path="/admin/newannouncement" exact><NewAnnouncement addAnnouncement={this.props.addAnnouncement}/></Route>
             </Switch>
         </div>
         )
@@ -19,6 +21,5 @@ class Admin extends Component{
 }
 
 export default Admin;
-
 
 

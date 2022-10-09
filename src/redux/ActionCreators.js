@@ -1,3 +1,10 @@
 import * as ActionTypes from './ActionTypes'
 
-//Configure the form then come back hereeeee
+export const addAnnouncement = (title, message) =>({
+    type: ActionTypes.ADD_ANNOUNCEMENT,
+    payload:{
+        title: title,
+        message: message
+    }
+
+});

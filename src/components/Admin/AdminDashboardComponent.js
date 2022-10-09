@@ -26,17 +26,17 @@ class Dashboard extends Component{
       <div className="container">
         <div className="row row-content">
           <div className="col-3">
-          <Nav className="nav-pills nav-fill " id="newAnnouncement" vertical>
+          <Nav className="nav-pills nav-fill " id="dashboard" vertical>
           <NavItem>
             <NavLink
-              className={({ active: this.state.activeTab === '1' })}
+              className={({ active: this.state.activeTab === '1' })} to="/newannouncement"
               onClick={() => { this.toggle('1'); }}>
               New Announcement
             </NavLink>
           </NavItem>
           <NavItem>
             <NavLink
-              className={({ active: this.state.activeTab === '2' })}
+              className={({ active: this.state.activeTab === '2' })} 
               onClick={() => { this.toggle('2'); }}>
               Account Approval  
             </NavLink>

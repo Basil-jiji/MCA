@@ -12,12 +12,14 @@ class NewAnnouncement extends Component{
     constructor(props){
         super(props);
         this.state={
+
         }
-        this.handleCommentFormSubmit = this.handleCommentFormSubmit.bind(this);
+        this.handleAnnouncementSubmit = this.handleAnnouncementSubmit.bind(this);
       }
-      handleCommentFormSubmit(values) {
-        console.log("Current State is: " + JSON.stringify(values));
-        alert("Current State is: " + JSON.stringify(values));
+      handleAnnouncementSubmit(values) {
+        // console.log("Current State is: " + JSON.stringify(values));
+        // alert("Current State is: " + JSON.stringify(values));
+        this.props.addAnnouncement(values.title, values.message)
     
     }
     
@@ -27,7 +29,7 @@ class NewAnnouncement extends Component{
                     <h4>New Announcement</h4>
                     <hr />
                     <React.Fragment>
-                        <LocalForm onSubmit={(values) => this.handleCommentFormSubmit(values)}>
+                        <LocalForm onSubmit={(values) => this.handleAnnouncementSubmit(values)}>
 
                             {/* Title */}
                             <Row className="form-group">
@@ -37,7 +39,7 @@ class NewAnnouncement extends Component{
                                         placeholder="Title"
                                         className="form-control"
                                         validators={{
-                                            required, minLength: minLength(3), maxLength: maxLength(15)
+                                            required, minLength: minLength(3), maxLength: maxLength(20)
                                         }}
                                     />
                                     <Errors
