@@ -1,8 +1,20 @@
 import React from "react";
 import { Card, CardImg, CardText, CardBody, CardTitle } from "reactstrap";
+import { Loading } from "../Loading/LoadingComponent"
 
 
-function RenderTopperItem({top}){
+function RenderTopperItem({top, isLoading, errMess}){
+  if(isLoading){
+    return(
+      <Loading />
+    )
+  }
+  else if(errMess){
+    return(
+      <h4>{errMess}</h4>
+    )
+  }
+  else
   return(
           <Card>
             <CardImg src={top.image} alt={top.name} />
@@ -14,7 +26,18 @@ function RenderTopperItem({top}){
   )
 }
 
-function RenderPlacementItem({placemt}){
+function RenderPlacementItem({placemt, isLoading, errMess}){
+  if(isLoading){
+    return(
+      <Loading />
+    )
+  }
+  else if(errMess){
+    return(
+      <h4>{errMess}</h4>
+    )
+  }
+  else
   return(
     <div>
       <div >
@@ -43,6 +66,7 @@ const Home = (props) => {
         <RenderPlacementItem placemt={placemt} />
     )
   }) 
+
 
 
 return(

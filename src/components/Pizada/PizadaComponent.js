@@ -55,7 +55,12 @@ class Pizada extends Component{
                                         }} />
                             </Col>
                             </Row>
-                            
+                            <Row className="form-group">
+                            <Label htmlFor="Upload" md={2}>Upload Files</Label>
+                            <Col md={5}>
+                            <Control.file model=".file" id="article" name="article" type="file"className="form-control"  accept="jpg, pdf, jpeg, docx, pdf"/>
+                            </Col>
+                            </Row>
                             <Row className="form-group">
                                 <Col md={{size:10, offset:2}}>
                                     <Button type="submit"value="submit" color="primary">

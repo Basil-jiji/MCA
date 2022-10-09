@@ -11,13 +11,14 @@ import Prayaana from "./Prayaana/PrayaanaComponent";
 import { connect } from "react-redux";
 import LoginMain from "./Login/LoginMainComponent";
 import Pizada from "./Pizada/PizadaComponent";
-import { addAnnouncement } from "../redux/ActionCreators";
-import NewAnnouncement from "./Admin/NewAnnouncementComponent";
+import { addAnnouncement, fetchToppers, fetchPlacements } from "../redux/ActionCreators";
 import Admin from "./Admin/AdminRouteComponent"
 
 const matchDispatchToProps = (dispatch) =>({
   addAnnouncement: (title, message) =>
-  dispatch(addAnnouncement(title, message))
+  dispatch(addAnnouncement(title, message)),
+  fetchToppers: () => {dispatch(fetchToppers())},
+  fetchPlacements: () => {dispatch(fetchPlacements())}
 });
 
 const mapStateToProps = state =>{
@@ -31,17 +32,29 @@ const mapStateToProps = state =>{
 }
 
 
+
 class Main extends Component{
     constructor(props){
       super(props);
     }
+
+    componentDidMount(){
+      this.props.fetchToppers();
+      this.props.fetchPlacements();
+    }
+
   render(){
     
     const Homepage = () =>{
       return(
         <Home 
-        topper={this.props.toppers} 
-        placement={this.props.placements} />
+        topper={this.props.toppers.toppers}
+        toppersLoading={this.props.toppers.isLoading}
+        toppersErrMess={this.props.toppers.errMess}
+        placement={this.props.placements.placements} 
+        placementsLoading={this.props.placements.isLoading}
+        placementsErrMess={this.props.placements.errMess}
+        />
       )
     }
 

@@ -1,4 +1,6 @@
-import { createStore, combineReducers } from "redux";
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import thunk from 'redux-thunk';
+import logger from 'redux-logger';
 import { Placements } from "./placements";
 import { Toppers } from "./toppers";
 import { Posts } from "./posts";
@@ -11,7 +13,8 @@ export const ConfigureStore = () =>{
             toppers: Toppers,
             posts: Posts,
             announcements: Announcements
-        })
+        }),
+        applyMiddleware(thunk, logger)
     );
     return store
 }

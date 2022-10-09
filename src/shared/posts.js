@@ -5,7 +5,7 @@ export const POSTS = [
         role: "student",
         date: "2014-09-05T17:57:28.556094Z",
         description: "Greetings",
-        content: "Hi Vishnu here ellarkkum sughaano?"
+        content: "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
     },
     {
         id: 1,
@@ -13,7 +13,7 @@ export const POSTS = [
         role: "student",
         date: "2014-12-05T17:57:28.556094Z",
         description: "Greetings",
-        content: "Hi Shan here ellarkkum sughaano?"
+        content: "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
     },
     {
         id: 2,
@@ -31,7 +31,7 @@ export const POSTS = [
         date: "2014-05-05T17:57:28.556094Z",
         description: "Greetings",
         image: '/assets/images/David.png',
-        content:"Enthokke und vishesham"
+        content:"Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
     },
     {
         id: 4,
