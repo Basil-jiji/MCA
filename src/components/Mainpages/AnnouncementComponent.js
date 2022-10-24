@@ -5,7 +5,6 @@ import {
   BreadcrumbItem,
   CardBody,
   CardText,
-  CardTitle,
   CardFooter,
   CardHeader,
   UncontrolledCollapse

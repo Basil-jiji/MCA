@@ -60,7 +60,7 @@ class Dashboard extends Component{
         <div className="col-9">
         <TabContent activeTab={this.state.activeTab}>
           <TabPane tabId="1">
-            { this.state.activeTab == 1 ? <NewAnnouncement /> : null }
+            { this.state.activeTab == 1 ? <NewAnnouncement addAnnouncement={this.props.addAnnouncement}/> : null }
           </TabPane>
           <TabPane tabId="2">
             { this.state.activeTab == 2 ? <AccountApproval /> : null }

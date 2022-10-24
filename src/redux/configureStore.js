@@ -7,6 +7,7 @@ import { Placements } from "./placements";
 import { Toppers } from "./toppers";
 import { Posts } from "./posts";
 import { Announcements } from "./announcement";
+import { InitialPrayaana } from "./prayaana";
 
 export const ConfigureStore = () =>{
     const store = createStore(
@@ -16,7 +17,8 @@ export const ConfigureStore = () =>{
             posts: Posts,
             announcements: Announcements,
             ...createForms({
-                feedback: InitialFeedback
+                feedback: InitialFeedback,
+                prayaana: InitialPrayaana
             })
         }),
         applyMiddleware(thunk, logger)

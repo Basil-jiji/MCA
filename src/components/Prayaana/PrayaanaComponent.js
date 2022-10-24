@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Control, LocalForm, Errors } from "react-redux-form";
+import { Control, Form, Errors } from "react-redux-form";
 import {
   Label,
   Button,
@@ -25,6 +25,7 @@ class Prayaana extends Component{
     handleSubmit(values){
         console.log("Current State is : " + JSON.stringify(values));
         alert("Current State is : " + JSON.stringify(values));
+        this.props.resetPrayaanaForm();
     }
 
     render(){
@@ -38,7 +39,7 @@ class Prayaana extends Component{
                     <div className="container">
                         <div className="row row-content">
                             <div className="col-12">
-                            <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
+                            <Form model="prayaana" onSubmit={(values) => this.handleSubmit(values)}>
                     <Row className="form-group">
                       <Label htmlFor="firstname" md={2}>First Name</Label>
                       <Col md={10}>
@@ -204,8 +205,7 @@ class Prayaana extends Component{
                             </Button>
                         </Col>
                     </Row>
-
-                  </LocalForm>
+                  </Form>
                             </div>
                         </div>
                     </div>

@@ -12,15 +12,22 @@ import Prayaana from "./Prayaana/PrayaanaComponent";
 import { connect } from "react-redux";
 import LoginMain from "./Login/LoginMainComponent";
 import Pizada from "./Pizada/PizadaComponent";
-import { addAnnouncement, fetchToppers, fetchPlacements } from "../redux/ActionCreators";
+import { addAnnouncement, fetchToppers, fetchPlacements, fetchPosts, fetchAnnouncements } from "../redux/ActionCreators";
 import Admin from "./Admin/AdminRouteComponent"
+import NewPost from "./NewPost/NewPostComponent";
+import { Loading } from "./Loading/LoadingComponent";
+
+//Fix Announcements ----- Now also check and verify the code for Fetch and Baseurl
 
 const matchDispatchToProps = (dispatch) =>({
   addAnnouncement: (title, message) =>
   dispatch(addAnnouncement(title, message)),
   fetchToppers: () => {dispatch(fetchToppers())},
   fetchPlacements: () => {dispatch(fetchPlacements())},
-  resetFeedbackForm: () => {dispatch(actions.reset('feedback'))}
+  fetchPosts:() => {dispatch(fetchPosts())},
+  fetchAnnouncements: () => {dispatch(fetchAnnouncements())},
+  resetFeedbackForm: () => {dispatch(actions.reset('feedback'))},
+  resetPrayaanaForm: () => {dispatch(actions.reset('prayaana'))}
 });
 
 const mapStateToProps = state =>{
@@ -33,6 +40,7 @@ const mapStateToProps = state =>{
   }
 }
 
+//Configure ADD_ANNOUNCEMENTS UNDER SHARED ONE ALSO
 
 
 class Main extends Component{
@@ -43,6 +51,9 @@ class Main extends Component{
     componentDidMount(){
       this.props.fetchToppers();
       this.props.fetchPlacements();
+      this.props.fetchAnnouncements();
+      this.props.fetchPosts();
+      
     }
 
   render(){
@@ -66,18 +77,30 @@ class Main extends Component{
           <Header />
           <Switch>
             <Route path="/home" component={Homepage} />
-            <Route exact path="/announcements" component={() => <Announcement announcement={this.props.announcements} />} />
-            <Route exact path="/posts" component={() => <Post post={this.props.posts} />} />
-            <Route exact path="/contactus" component={() => <Contact resetFeedbackForm={this.props.resetFeedbackForm}/>} />
+            <Route exact path="/announcements" component={() => 
+            <Announcement 
+              announcement={this.props.announcements.announcements} />} />
+            <Route exact path="/posts" component={() => 
+              <Post 
+                post={this.props.posts.posts} 
+              
+              />} />
+            <Route exact path="/contactus" component={() => 
+              <Contact 
+                resetFeedbackForm={this.props.resetFeedbackForm}
+              
+              />} />
             <Route exact path="/login" component={() => <LoginMain />} />
             <Route exact path="/signup" component={() => <SignUp />} />
             <Route exact path="/prayaana" component={() => <Prayaana />} />
             <Route exact path="/pizada" component={() => <Pizada />} />
-            <Route path="/admin" component={() => <Admin addAnnouncement={this.props.addAnnouncement}/>} />
-            
+            <Route exact path="/newpost" component={() => <NewPost />} />
+            <Route path="/admin" component={() => 
+              <Admin 
+                addAnnouncement={this.props.addAnnouncement}/>} />
+            {/* <Route exact path="/load" component={()=><Loading />} /> */}
             <Redirect to="/home" />
           </Switch>
-          
           <Footer />
       </div>
   );

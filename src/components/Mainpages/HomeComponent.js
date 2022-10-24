@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, CardImg, CardText, CardBody, CardTitle } from "reactstrap";
 import { Loading } from "../Loading/LoadingComponent"
+import { baseUrl } from "../../shared/baseUrl";
 
 
 function RenderTopperItem({top, isLoading, errMess}){
@@ -17,7 +18,7 @@ function RenderTopperItem({top, isLoading, errMess}){
   else
   return(
           <Card>
-            <CardImg src={top.image} alt={top.name} />
+            <CardImg src={baseUrl + top.image} alt={top.name} />
             <CardBody>
             <CardTitle>{top.name}</CardTitle>
             <CardText>{top.score}</CardText>
@@ -42,7 +43,7 @@ function RenderPlacementItem({placemt, isLoading, errMess}){
     <div>
       <div >
         <Card>
-      <CardImg src={placemt.image} alt={placemt.name}/>
+      <CardImg src={baseUrl + placemt.image} alt={placemt.name}/>
       <CardBody>
         <CardTitle>{placemt.name}</CardTitle>
         <CardText>{placemt.company}</CardText>
@@ -57,13 +58,19 @@ function RenderPlacementItem({placemt, isLoading, errMess}){
 const Home = (props) => {
   const top = props.topper.map((top) => {
     return(
-        <RenderTopperItem top={top}/>
+        <RenderTopperItem top={top}
+        isLoading={props.toppersLoading}
+        errMess={props.toppersErrMess}
+        />
     )
   })
 
   const placemt = props.placement.map((placemt) => {
     return(
-        <RenderPlacementItem placemt={placemt} />
+        <RenderPlacementItem placemt={placemt} 
+        isLoading={props.placementsLoading}
+        errMess={props.placementsErrMess}
+        />
     )
   }) 
 
