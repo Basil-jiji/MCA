@@ -10,8 +10,22 @@ import {
   UncontrolledCollapse
 } from "reactstrap";
 import { Link } from 'react-router-dom';
+import { Loading } from "../Loading/LoadingComponent"
 
-function RenderAnnouncementItem({ announcement, onClick }){
+function RenderAnnouncementContent({announcements, isLoading, errMess}){
+//   if (isLoading) {
+//     return <Loading />;
+// } else if (errMess) {
+//     return <h4>{errMess}</h4>;
+// } else
+    return (
+      announcements.announcements.map(announce => (
+        <RenderAnnouncementItem key={announce.id} announcement={announce} />
+      ))
+    );
+}
+
+function RenderAnnouncementItem({announcement}){
   return(
     <div>
           <Card>
@@ -40,13 +54,13 @@ function RenderAnnouncementItem({ announcement, onClick }){
 
   //Arrow Function
   const Announcement = (props) => {
-    const announce = props.announcement.map((announcement) => {
-      return (
-        <div key={announcement.id} className="col-12 col-md-12 m-1">
-          <RenderAnnouncementItem announcement={announcement} />
-        </div>
-      );
-    });
+    // const announce = props.announcement.map((announcement) => {
+    //   return (
+    //     <div key={announcement.id} className="col-12 col-md-12 m-1">
+    //       <RenderAnnouncementItem announcement={announcement} />
+    //     </div>
+    //   );
+    // });
 
     return (
       <div className="container">
@@ -60,7 +74,13 @@ function RenderAnnouncementItem({ announcement, onClick }){
             <hr />
           </div>
         </div>
-        <div className="row">{announce}</div>
+        <div className="d-flex flex-column-reverse">
+        <RenderAnnouncementContent 
+        announcements={props.announcement}
+        isLoading={props.announceLoading}
+        errMess={props.announceFailed}
+        />
+        </div>
       </div>
     );
   }

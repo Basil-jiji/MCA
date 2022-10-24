@@ -18,7 +18,17 @@ import NewPost from "./NewPost/NewPostComponent";
 
 //Fix Announcements ----- Now also check and verify the code for Fetch and Baseurl
 
-const matchDispatchToProps = (dispatch) =>({
+const mapStateToProps = state =>{
+  return{
+    toppers : state.toppers,
+    placements: state.placements,
+    announcements : state.announcements,
+    posts: state.posts
+
+  }
+}
+
+const mapDispatchToProps = (dispatch) =>({
   postAnnouncement: (title, message) =>
   dispatch(postAnnouncement(title, message)),
   fetchToppers: () => {dispatch(fetchToppers())},
@@ -32,16 +42,6 @@ const matchDispatchToProps = (dispatch) =>({
   postPrayaana: (firstname, lastname, course, registerNumber, batch, collegeName, coding, quiz, gaming, treasure, email, phoneNumber) => dispatch(postPrayaana(firstname, lastname, course, registerNumber, batch, collegeName, coding, quiz, gaming, treasure, email, phoneNumber))
 });
 
-const mapStateToProps = state =>{
-  return{
-    toppers : state.toppers,
-    placements: state.placements,
-    announcements : state.announcements,
-    posts: state.posts
-
-  }
-}
-
 
 class Main extends Component{
 
@@ -50,6 +50,7 @@ class Main extends Component{
       this.props.fetchPlacements();
       this.props.fetchAnnouncements();
       this.props.fetchPosts();
+      this.props.fetchPrayaana();
       
     }
 
@@ -58,10 +59,10 @@ class Main extends Component{
     const Homepage = () =>{
       return(
         <Home 
-        topper={this.props.toppers.toppers}
+        topper={this.props.toppers}
         toppersLoading={this.props.toppers.isLoading}
         toppersErrMess={this.props.toppers.errMess}
-        placement={this.props.placements.placements} 
+        placement={this.props.placements} 
         placementsLoading={this.props.placements.isLoading}
         placementsErrMess={this.props.placements.errMess}
         />
@@ -70,17 +71,21 @@ class Main extends Component{
 
 
     return (
-      <div className="App">
+      <div>
           <Header />
           <Switch>
             <Route path="/home" component={Homepage} />
             <Route exact path="/announcements" component={() => 
             <Announcement 
-              announcement={this.props.announcements.announcements} />} />
+              announcement={this.props.announcements} 
+              announceLoading={this.props.announcements.isLoading}
+              announceFailed={this.props.announcements.errMess}
+              />} />
             <Route exact path="/posts" component={() => 
               <Post 
-                post={this.props.posts.posts} 
-              
+                post={this.props.posts}
+                postsLoading={this.props.posts.isLoading}
+                postsFailed={this.props.posts.errMess}
               />} />
             <Route exact path="/contactus" component={() => 
               <Contact 
@@ -99,10 +104,7 @@ class Main extends Component{
               <Admin 
                 postAnnouncement={this.props.postAnnouncement}
                 fetchPrayaana={this.props.fetchPrayaana}
-                />} 
-                />
-
-            {/* <Route exact path="/load" component={()=><Loading />} /> */}
+                />} />
             <Redirect to="/home" />
           </Switch>
           <Footer />
@@ -111,4 +113,4 @@ class Main extends Component{
 }
 }
 
-export default withRouter(connect(mapStateToProps, matchDispatchToProps)(Main));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));

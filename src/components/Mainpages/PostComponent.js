@@ -1,6 +1,17 @@
 import React from "react";
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardText, CardHeader, CardImg, CardFooter } from 'reactstrap';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import { Loading } from '../Loading/LoadingComponent';
+import { baseUrl } from '../../shared/baseUrl';
+
+function RenderPostContent({posts}) {
+    
+    return (
+        posts.posts.map(post => (
+          <RenderPostItem key={post.id} post={post} />
+        ))
+      );
+}
 
 function RenderPostItem({post}){
     return(
@@ -24,14 +35,14 @@ function RenderPostItem({post}){
 }
 
 const Post = (props) => {
-    const post = props.post.map((post)=>{
-        return(
-                <div key={post.id} className="col-6 m-3">
-                <RenderPostItem post={post}/>
-            </div>
+    // const post = props.post.map((post)=>{
+    //     return(
+    //             <div key={post.id} className="col-6 m-3">
+    //             <RenderPostItem post={post}/>
+    //         </div>
 
-        )
-    });
+    //     );
+    // });
 
     return(
         <div className="container">
@@ -45,10 +56,13 @@ const Post = (props) => {
                     <hr />
                 </div>
             </div>
-            <div className="col">
-            {post}
+            <div className="col-6 m-3">
+            <div className="d-flex flex-column-reverse">
+            <RenderPostContent 
+            posts={props.post}
+            />
             </div>
-            
+            </div>
         </div>
     )
 }

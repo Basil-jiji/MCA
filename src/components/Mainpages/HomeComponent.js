@@ -3,19 +3,33 @@ import { Card, CardImg, CardText, CardBody, CardTitle } from "reactstrap";
 import { Loading } from "../Loading/LoadingComponent"
 import { baseUrl } from "../../shared/baseUrl";
 
+function RenderTopperContent({toppers, isLoading, errMess}){
+  if (isLoading) {
+    return <Loading />;
+} else if (errMess) {
+    return <h4>{errMess}</h4>;
+} else
+    return (
+      toppers.toppers.map(topper => (
+        <RenderTopperItem key={topper.id} top={topper} />
+      ))
+    );
+}
 
-function RenderTopperItem({top, isLoading, errMess}){
-  if(isLoading){
-    return(
-      <Loading />
+function RenderPlacementContent({placements, isLoading, errMess}){
+  if (isLoading) {
+    return <Loading />;
+} else if (errMess) {
+    return <h4>{errMess}</h4>;
+} else
+    return (
+      placements.placements.map(placement => (
+        <RenderPlacementItem key={placement.id} placemt={placement}/>
+      ))
     )
-  }
-  else if(errMess){
-    return(
-      <h4>{errMess}</h4>
-    )
-  }
-  else
+}
+
+function RenderTopperItem({top}){
   return(
           <Card>
             <CardImg src={baseUrl + top.image} alt={top.name} />
@@ -27,28 +41,17 @@ function RenderTopperItem({top, isLoading, errMess}){
   )
 }
 
-function RenderPlacementItem({placemt, isLoading, errMess}){
-  if(isLoading){
-    return(
-      <Loading />
-    )
-  }
-  else if(errMess){
-    return(
-      <h4>{errMess}</h4>
-    )
-  }
-  else
+function RenderPlacementItem({placemt}){
   return(
     <div>
       <div >
         <Card>
-      <CardImg src={baseUrl + placemt.image} alt={placemt.name}/>
-      <CardBody>
-        <CardTitle>{placemt.name}</CardTitle>
-        <CardText>{placemt.company}</CardText>
-      </CardBody>
-    </Card>
+          <CardImg src={baseUrl + placemt.image} alt={placemt.name}/>
+            <CardBody>
+              <CardTitle>{placemt.name}</CardTitle>
+              <CardText>{placemt.company}</CardText>
+            </CardBody>
+        </Card>
         </div>
       </div>
 
@@ -56,26 +59,6 @@ function RenderPlacementItem({placemt, isLoading, errMess}){
 }
 
 const Home = (props) => {
-  const top = props.topper.map((top) => {
-    return(
-        <RenderTopperItem top={top}
-        isLoading={props.toppersLoading}
-        errMess={props.toppersErrMess}
-        />
-    )
-  })
-
-  const placemt = props.placement.map((placemt) => {
-    return(
-        <RenderPlacementItem placemt={placemt} 
-        isLoading={props.placementsLoading}
-        errMess={props.placementsErrMess}
-        />
-    )
-  }) 
-
-
-
 return(
   <>
   <div className="jumbotron">
@@ -94,14 +77,22 @@ return(
     <h3>TOPPERS</h3>
     <hr />
     <div className="d-flex p-2 justify-content-around flex-wrap">
-        {top}
+        <RenderTopperContent 
+        toppers={props.topper}
+        isLoading={props.toppersLoading}
+        errMess={props.toppersErrMess}
+        />
     </div>
     </div>
   <div className="container">
       <h3>PLACEMENTS</h3>
       <hr />
       <div className="d-flex p-2 justify-content-around flex-wrap">
-          {placemt}
+      <RenderPlacementContent 
+        placements={props.placement}
+        isLoading={props.placementsLoading}
+        errMess={props.placementsErrMess}
+        />
       </div >
     </div>
     </>
