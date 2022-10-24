@@ -12,22 +12,24 @@ import Prayaana from "./Prayaana/PrayaanaComponent";
 import { connect } from "react-redux";
 import LoginMain from "./Login/LoginMainComponent";
 import Pizada from "./Pizada/PizadaComponent";
-import { addAnnouncement, fetchToppers, fetchPlacements, fetchPosts, fetchAnnouncements } from "../redux/ActionCreators";
+import { fetchToppers, fetchPlacements, fetchPosts, fetchAnnouncements, fetchPrayaana, postAnnouncement, postFeedback, postPrayaana } from "../redux/ActionCreators";
 import Admin from "./Admin/AdminRouteComponent"
 import NewPost from "./NewPost/NewPostComponent";
-import { Loading } from "./Loading/LoadingComponent";
 
 //Fix Announcements ----- Now also check and verify the code for Fetch and Baseurl
 
 const matchDispatchToProps = (dispatch) =>({
-  addAnnouncement: (title, message) =>
-  dispatch(addAnnouncement(title, message)),
+  postAnnouncement: (title, message) =>
+  dispatch(postAnnouncement(title, message)),
   fetchToppers: () => {dispatch(fetchToppers())},
   fetchPlacements: () => {dispatch(fetchPlacements())},
   fetchPosts:() => {dispatch(fetchPosts())},
   fetchAnnouncements: () => {dispatch(fetchAnnouncements())},
-  resetFeedbackForm: () => {dispatch(actions.reset('feedback'))},
-  resetPrayaanaForm: () => {dispatch(actions.reset('prayaana'))}
+  fetchPrayaana: () => { dispatch(fetchPrayaana())},
+  resetFeedbackForm: () => { dispatch(actions.reset('feedback')) },
+  resetPrayaanaForm: () => { dispatch(actions.reset('prayaana')) },
+  postFeedback: (firstname, lastname, telnum, email, agree, contactType, message) => dispatch(postFeedback(firstname, lastname, telnum, email, agree, contactType, message)),
+  postPrayaana: (firstname, lastname, course, registerNumber, batch, collegeName, coding, quiz, gaming, treasure, email, phoneNumber) => dispatch(postPrayaana(firstname, lastname, course, registerNumber, batch, collegeName, coding, quiz, gaming, treasure, email, phoneNumber))
 });
 
 const mapStateToProps = state =>{
@@ -40,13 +42,8 @@ const mapStateToProps = state =>{
   }
 }
 
-//Configure ADD_ANNOUNCEMENTS UNDER SHARED ONE ALSO
-
 
 class Main extends Component{
-    constructor(props){
-      super(props);
-    }
 
     componentDidMount(){
       this.props.fetchToppers();
@@ -88,16 +85,23 @@ class Main extends Component{
             <Route exact path="/contactus" component={() => 
               <Contact 
                 resetFeedbackForm={this.props.resetFeedbackForm}
-              
+                postFeedback={this.props.postFeedback}
               />} />
             <Route exact path="/login" component={() => <LoginMain />} />
             <Route exact path="/signup" component={() => <SignUp />} />
-            <Route exact path="/prayaana" component={() => <Prayaana />} />
+            <Route exact path="/prayaana" component={() => <Prayaana
+              resetPrayaanaForm={this.props.resetPrayaanaForm}
+              postPrayaana={this.props.postPrayaana}
+            />} />
             <Route exact path="/pizada" component={() => <Pizada />} />
             <Route exact path="/newpost" component={() => <NewPost />} />
             <Route path="/admin" component={() => 
               <Admin 
-                addAnnouncement={this.props.addAnnouncement}/>} />
+                postAnnouncement={this.props.postAnnouncement}
+                fetchPrayaana={this.props.fetchPrayaana}
+                />} 
+                />
+
             {/* <Route exact path="/load" component={()=><Loading />} /> */}
             <Redirect to="/home" />
           </Switch>

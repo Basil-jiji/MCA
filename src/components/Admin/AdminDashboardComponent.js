@@ -4,6 +4,7 @@ import NewAnnouncement from "./NewAnnouncementComponent";
 import AccountApproval from "./AccountApprovalComponent";
 import ManageAccounts from "./ManageAccountsComponent";
 import AdminResetPassword from "./AdminResetPAsswordComponent";
+import PrayaanaReg from "./PrayaanaRegComponent";
 
 class Dashboard extends Component{
     constructor(props){
@@ -55,12 +56,19 @@ class Dashboard extends Component{
               Reset Password  
             </NavLink>
           </NavItem>
+          <NavItem>
+            <NavLink
+              className={({ active: this.state.activeTab === '5' })}
+              onClick={() => { this.toggle('5'); }}>
+              Prayaana Registrations  
+            </NavLink>
+          </NavItem>
         </Nav>
         </div>
         <div className="col-9">
         <TabContent activeTab={this.state.activeTab}>
           <TabPane tabId="1">
-            { this.state.activeTab == 1 ? <NewAnnouncement addAnnouncement={this.props.addAnnouncement}/> : null }
+            { this.state.activeTab == 1 ? <NewAnnouncement postAnnouncement={this.props.postAnnouncement}/> : null }
           </TabPane>
           <TabPane tabId="2">
             { this.state.activeTab == 2 ? <AccountApproval /> : null }
@@ -71,10 +79,13 @@ class Dashboard extends Component{
           <TabPane tabId="4">
             { this.state.activeTab == 4 ? <AdminResetPassword /> : null }
           </TabPane>
+          <TabPane tabId="5">
+            { this.state.activeTab == 5 ? <PrayaanaReg /> : null }
+          </TabPane>
         </TabContent>
         </div>
-          </div>
-          </div>
+      </div>
+    </div>
     );
     }
 }

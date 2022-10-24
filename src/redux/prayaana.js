@@ -3,13 +3,12 @@ export const InitialPrayaana = {
     lastname:'',
     course:'',
     registerNumber:'',
-    batch:'2021-2023',  
+    batch:'2021-2023',
+    collegeName:'',  
     coding:false,
     quiz:false,
     gaming:false,
     treasure:false,
     email:'',
-    phoneNumber:'',
-    contactType:'Contact Number',
-    message:''
+    phoneNumber:''
 }

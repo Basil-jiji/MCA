@@ -11,7 +11,7 @@ class Admin extends Component{
             <div>
             <Switch>
                 <Route path="/admin" exact><AdminLogin/></Route>
-                <Route path="/admin/dashboard" exact><Dashboard addAnnouncement={this.props.addAnnouncement}/></Route>
+                <Route path="/admin/dashboard" exact><Dashboard postAnnouncement={this.props.postAnnouncement}/></Route>
             </Switch>
         </div>
         )

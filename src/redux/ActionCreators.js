@@ -1,8 +1,14 @@
 import * as ActionTypes from './ActionTypes'
 import { baseUrl } from '../shared/baseUrl';
 
-export const addAnnouncement = (announcements) =>({
+export const addAnnouncement = (announcement) =>({
     type: ActionTypes.ADD_ANNOUNCEMENT,
+    payload: announcement
+
+});
+
+export const addAnnouncements = (announcements) =>({
+    type: ActionTypes.ADD_ANNOUNCEMENTS,
     payload: announcements
 
 });
@@ -209,3 +215,105 @@ export const addPlacements = (placements) => ({
     payload: placements
 }) 
 
+export const postFeedback = (firstname, lastname, telnum, email, agree, contactType, message) => (dispatch) =>{
+    const newFeedback = {
+        firstname: firstname,
+        lastname: lastname,
+        telnum: telnum,
+        email: email,
+        agree: agree,
+        contactType: contactType,
+        message: message
+    }
+    newFeedback.date = new Date().toISOString();
+
+    return fetch(baseUrl + 'feedback',{
+        method: 'POST',
+        body: JSON.stringify(newFeedback),
+        headers:{
+            'Content-Type': 'application/json'
+        },
+        credentials: 'same-origin'
+    })
+    .then(response => {
+
+        if (response.ok) {
+            
+            return response;
+        }
+        else {
+            var error = new Error('Error ' + response.status + ': ' + response.statusText)
+            error.response = response;
+            throw error;
+        }
+    },
+        ////if no responmse from server 
+        error => {
+            var errmess = new Error(error.message);
+            throw errmess;
+        }
+    )
+    .then(response => response.json())
+    .then(response => alert(JSON.stringify(response)))
+    .catch(error => {
+        console.log('Post Feedback', error.message);
+        alert('Feedback could not be posted\nError' + error.message);
+    });
+
+}
+
+export const postPrayaana = (firstname, lastname, course, registernumber, batch, collegeName, coding, quiz, gaming, treasure, email, phoneNumber) => (dispatch) => {
+    const newPrayaana = {
+        firstname: firstname,
+        lastname: lastname,
+        course: course,
+        registernumber: registernumber,
+        batch: batch,
+        collegeName: collegeName,
+        coding: coding,
+        quiz: quiz,
+        gaming: gaming,
+        treasure: treasure,
+        email: email,
+        phoneNumber: phoneNumber
+    }
+    newPrayaana.date = new Date().toISOString();
+
+    return fetch(baseUrl + 'prayaana',{
+        method: 'POST',
+        body: JSON.stringify(newPrayaana),
+        headers:{
+            'Content-Type': 'application/json'
+        },
+        credentials: 'same-origin'
+    })
+    .then(response => {
+
+        if (response.ok) {
+            
+            return response;
+        }
+        else {
+            var error = new Error('Error ' + response.status + ': ' + response.statusText)
+            error.response = response;
+            throw error;
+        }
+    },
+        ////if no responmse from server 
+        error => {
+            var errmess = new Error(error.message);
+            throw errmess;
+        }
+    )
+    .then(response => response.json())
+    .then(response => alert(JSON.stringify(response)))
+    .catch(error => {
+        console.log('Prayaana Registration', error.message);
+        alert('Prayaana Registration Failed\nError' + error.message);
+    });
+}
+
+export const fetchPrayaana = () => (dispatch) =>{
+
+    return fetch(baseUrl + 'prayaana')
+}

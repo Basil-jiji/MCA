@@ -19,7 +19,7 @@ class NewAnnouncement extends Component{
       handleAnnouncementSubmit(values) {
         // console.log("Current State is: " + JSON.stringify(values));
         // alert("Current State is: " + JSON.stringify(values));
-        this.props.addAnnouncement(values.title, values.message)
+        this.props.postAnnouncement(values.title, values.message)
     
     }
     

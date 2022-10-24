@@ -23,9 +23,11 @@ class Prayaana extends Component{
     }
 
     handleSubmit(values){
-        console.log("Current State is : " + JSON.stringify(values));
-        alert("Current State is : " + JSON.stringify(values));
+        // console.log("Current State is : " + JSON.stringify(values));
+        // alert("Current State is : " + JSON.stringify(values));
         this.props.resetPrayaanaForm();
+        this.props.postPrayaana(values.firstname, values.lastname, values.course, values.registerNumber, values.batch, values.collegeName, values.coding, values.quiz, values.gaming, values.treasure, values.email, values.phoneNumber)
+
     }
 
     render(){
