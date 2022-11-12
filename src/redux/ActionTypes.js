@@ -29,5 +29,14 @@ export const ADD_PIZADAS = 'ADD_PIZADAS';
 export const PIZADA_LOADING = 'PIZADA_LOADING';
 export const PIZADA_FAILED = 'PIZADA_FAILED';
 
+export const LOGIN_REQUEST = 'LOGIN_REQUEST';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAILURE = 'LOGIN_FAILURE';
+export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
+export const LOGOUT_FAILURE = 'LOGOUT_FAILURE';
+
+
+
 
 

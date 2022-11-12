@@ -9,6 +9,7 @@ import { Announcements } from "./announcement";
 import { Feedbacks, InitialFeedback } from "./feedback";
 import { InitialPrayaana, Prayaanas } from "./prayaana";
 import { Pizadas } from "./pizada";
+import { Auth } from "./auth";
 
 export const ConfigureStore = () =>{
     const store = createStore(
@@ -20,6 +21,7 @@ export const ConfigureStore = () =>{
             feedbacks: Feedbacks,
             prayaanas: Prayaanas,
             pizadas: Pizadas,
+            auth: Auth,
             ...createForms({
                 feedback: InitialFeedback,
                 prayaana: InitialPrayaana
