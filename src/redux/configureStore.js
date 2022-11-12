@@ -1,5 +1,4 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
-import { InitialFeedback } from "./feedback";
 import { createForms } from "react-redux-form";
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
@@ -7,7 +6,8 @@ import { Placements } from "./placements";
 import { Toppers } from "./toppers";
 import { Posts } from "./posts";
 import { Announcements } from "./announcement";
-import { InitialPrayaana } from "./prayaana";
+import { Feedbacks, InitialFeedback } from "./feedback";
+import { InitialPrayaana, Prayaanas } from "./prayaana";
 
 export const ConfigureStore = () =>{
     const store = createStore(
@@ -16,6 +16,8 @@ export const ConfigureStore = () =>{
             toppers: Toppers,
             posts: Posts,
             announcements: Announcements,
+            feedbacks: Feedbacks,
+            prayaanas: Prayaanas,
             ...createForms({
                 feedback: InitialFeedback,
                 prayaana: InitialPrayaana

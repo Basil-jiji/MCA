@@ -5,7 +5,6 @@ import { Loading } from '../Loading/LoadingComponent';
 import { baseUrl } from '../../shared/baseUrl';
 
 function RenderPostContent({posts}) {
-    
     return (
         posts.posts.map(post => (
           <RenderPostItem key={post.id} post={post} />
@@ -15,9 +14,9 @@ function RenderPostContent({posts}) {
 
 function RenderPostItem({post}){
     return(
-        <Card>
+        <Card className="mb-3">
             <CardHeader><h6>{post.name}</h6></CardHeader>
-            {post.image ? <CardImg src={post.image} width="100%" height="250px"/> : null}
+            {post.image ? <CardImg src={baseUrl + post.image} width="100%" height="250px"/> : null}
                     <CardBody>
                         <CardText>{post.content}
                         </CardText>

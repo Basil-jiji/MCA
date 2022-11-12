@@ -12,18 +12,21 @@ import Prayaana from "./Prayaana/PrayaanaComponent";
 import { connect } from "react-redux";
 import LoginMain from "./Login/LoginMainComponent";
 import Pizada from "./Pizada/PizadaComponent";
-import { fetchToppers, fetchPlacements, fetchPosts, fetchAnnouncements, fetchPrayaana, postAnnouncement, postFeedback, postPrayaana } from "../redux/ActionCreators";
+import { fetchToppers, fetchPlacements, fetchPosts, fetchAnnouncements, fetchPrayaana, fetchFeedback, postAnnouncement, postFeedback, postPrayaana, postPost } from "../redux/ActionCreators";
 import Admin from "./Admin/AdminRouteComponent"
 import NewPost from "./NewPost/NewPostComponent";
+import Feedback from "./Feedback/FeedbackComponent";
+import PrayaanaReg from "./Prayaana/PrayaanaRegComponent";
 
-//Fix Announcements ----- Now also check and verify the code for Fetch and Baseurl
 
 const mapStateToProps = state =>{
   return{
     toppers : state.toppers,
     placements: state.placements,
     announcements : state.announcements,
-    posts: state.posts
+    posts: state.posts,
+    feedbacks: state.feedbacks,
+    prayaanas: state.prayaanas
 
   }
 }
@@ -31,11 +34,13 @@ const mapStateToProps = state =>{
 const mapDispatchToProps = (dispatch) =>({
   postAnnouncement: (title, message) =>
   dispatch(postAnnouncement(title, message)),
+  postPost: (message, ) => dispatch(postPost(message,)),
   fetchToppers: () => {dispatch(fetchToppers())},
   fetchPlacements: () => {dispatch(fetchPlacements())},
   fetchPosts:() => {dispatch(fetchPosts())},
   fetchAnnouncements: () => {dispatch(fetchAnnouncements())},
   fetchPrayaana: () => { dispatch(fetchPrayaana())},
+  fetchFeedback: () => { dispatch(fetchFeedback())},
   resetFeedbackForm: () => { dispatch(actions.reset('feedback')) },
   resetPrayaanaForm: () => { dispatch(actions.reset('prayaana')) },
   postFeedback: (firstname, lastname, telnum, email, agree, contactType, message) => dispatch(postFeedback(firstname, lastname, telnum, email, agree, contactType, message)),
@@ -50,8 +55,8 @@ class Main extends Component{
       this.props.fetchPlacements();
       this.props.fetchAnnouncements();
       this.props.fetchPosts();
+      this.props.fetchFeedback();
       this.props.fetchPrayaana();
-      
     }
 
   render(){
@@ -99,12 +104,16 @@ class Main extends Component{
               postPrayaana={this.props.postPrayaana}
             />} />
             <Route exact path="/pizada" component={() => <Pizada />} />
-            <Route exact path="/newpost" component={() => <NewPost />} />
+            <Route exact path="/newpost" component={() => <NewPost postPost={this.props.postPost}/>} />
             <Route path="/admin" component={() => 
               <Admin 
                 postAnnouncement={this.props.postAnnouncement}
-                fetchPrayaana={this.props.fetchPrayaana}
+                prayaana={this.props.prayaana}
                 />} />
+            <Route exact path='/feed' component={()=><Feedback 
+                feedback = {this.props.feedbacks}/>} />
+            <Route exact path='/prayaanareg' component={()=><PrayaanaReg 
+                prayaana = {this.props.prayaanas}/>} />
             <Redirect to="/home" />
           </Switch>
           <Footer />

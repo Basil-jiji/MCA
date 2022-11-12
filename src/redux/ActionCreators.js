@@ -86,6 +86,48 @@ export const announcementFailed = (errmess) => ({
     payload: errmess
 });
 
+export const addPost = (post) =>({
+    type: ActionTypes.ADD_POST,
+    payload: post
+
+});
+
+export const postPost = (content) => (dispatch) =>{
+    const newPost = {
+        content: content
+    }
+    newPost.date = new Date().toISOString();
+
+    return fetch (baseUrl + 'posts',
+    {
+        method: 'POST',
+        body: JSON.stringify(newPost),
+        headers: {
+            'Content-type' : 'application/json'
+        },
+        credentials: 'same-origin'
+    })
+    .then(response => {
+        if(response.ok){
+            return response;
+        }
+        else{
+            var error = new Error('Error' + response.status + ': ' + response.statusText );
+            error.response = response;
+            throw error;
+        }
+    },
+    error => {
+        var errmess = new Error(error.message);
+        throw errmess; 
+    }
+    )
+    .then(response => response.json())
+    .then(response => dispatch(addPost(response)))
+    .catch(error => {console.log('Post Posts', error.message);
+        alert('Your Post could not be posted\nError:' + error.message); })
+}
+
 export const fetchPosts = () => (dispatch) =>{
     dispatch(postsLoading(true));
 
@@ -262,6 +304,47 @@ export const postFeedback = (firstname, lastname, telnum, email, agree, contactT
 
 }
 
+export const fetchFeedback = () => (dispatch) =>{
+    dispatch(feedbackLoading(true));
+
+    return fetch(baseUrl + 'feedback')
+    .then(response => {
+        //When an error comes of the server
+        if(response.ok){
+            return response;
+        }
+        else{
+            var error = new Error('Error' + response.status + ': ' + response.statusText );
+            error.response = response;
+            throw error;
+        }
+    },
+
+    //When nothing come out of the server
+    error => {
+        var errmess = new Error(error.message);
+        throw errmess; 
+    }
+    )
+    .then(response => response.json())
+    .then(feedbacks => dispatch(addFeedbacks(feedbacks)))
+    .catch(error => dispatch(feedbackFailed(error.message)));
+}
+
+export const feedbackLoading = () => ({
+    type: ActionTypes.FEEDBACK_LOADING
+});
+
+export const feedbackFailed = (errmess) => ({
+    type: ActionTypes.FEEDBACK_FAILED,
+    payload: errmess
+});
+
+export const addFeedbacks = (feedbacks) => ({
+    type: ActionTypes.ADD_FEEDBACKS,
+    payload: feedbacks
+}) 
+
 export const postPrayaana = (firstname, lastname, course, registernumber, batch, collegeName, coding, quiz, gaming, treasure, email, phoneNumber) => (dispatch) => {
     const newPrayaana = {
         firstname: firstname,
@@ -288,9 +371,7 @@ export const postPrayaana = (firstname, lastname, course, registernumber, batch,
         credentials: 'same-origin'
     })
     .then(response => {
-
         if (response.ok) {
-            
             return response;
         }
         else {
@@ -313,7 +394,45 @@ export const postPrayaana = (firstname, lastname, course, registernumber, batch,
     });
 }
 
+
+
 export const fetchPrayaana = () => (dispatch) =>{
+    dispatch(prayaanaLoading(true));
 
     return fetch(baseUrl + 'prayaana')
+    .then(response => {
+        //When an error comes of the server
+        if(response.ok){
+            return response;
+        }
+        else{
+            var error = new Error('Error' + response.status + ': ' + response.statusText );
+            error.response = response;
+            throw error;
+        }
+    },
+
+    //When nothing come out of the server
+    error => {
+        var errmess = new Error(error.message);
+        throw errmess; 
+    }
+    )
+    .then(response => response.json())
+    .then(prayaanas => dispatch(addPrayaanas(prayaanas)))
+    .catch(error => dispatch(prayaanaFailed(error.message)));
 }
+
+export const prayaanaLoading = () => ({
+    type: ActionTypes.PRAYAANA_LOADING
+});
+
+export const prayaanaFailed = (errmess) => ({
+    type: ActionTypes.PRAYAANA_FAILED,
+    payload: errmess
+});
+
+export const addPrayaanas = (prayaanas) => ({
+    type: ActionTypes.ADD_PRAYAANAS,
+    payload: prayaanas
+}) 

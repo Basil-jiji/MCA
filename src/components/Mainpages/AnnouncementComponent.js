@@ -28,7 +28,7 @@ function RenderAnnouncementContent({announcements, isLoading, errMess}){
 function RenderAnnouncementItem({announcement}){
   return(
     <div>
-          <Card>
+          <Card className="mb-3">
             <CardHeader className="text-center btn-link" id="toggler"><h5>{announcement.title}</h5></CardHeader>
             {/* <UncontrolledCollapse toggler="#toggler"> */}
             <CardBody>
