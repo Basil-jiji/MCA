@@ -12,11 +12,12 @@ import Prayaana from "./Prayaana/PrayaanaComponent";
 import { connect } from "react-redux";
 import LoginMain from "./Login/LoginMainComponent";
 import Pizada from "./Pizada/PizadaComponent";
-import { fetchToppers, fetchPlacements, fetchPosts, fetchAnnouncements, fetchPrayaana, fetchFeedback, postAnnouncement, postFeedback, postPrayaana, postPost } from "../redux/ActionCreators";
+import { fetchToppers, fetchPlacements, fetchPosts, fetchAnnouncements, fetchPrayaana, fetchFeedback, fetchPizada, postAnnouncement, postFeedback, postPrayaana, postPost, postPizada } from "../redux/ActionCreators";
 import Admin from "./Admin/AdminRouteComponent"
 import NewPost from "./NewPost/NewPostComponent";
 import Feedback from "./Feedback/FeedbackComponent";
 import PrayaanaReg from "./Prayaana/PrayaanaRegComponent";
+import PizadaReg from "./Pizada/PizadaRegComponent";
 
 
 const mapStateToProps = state =>{
@@ -26,7 +27,8 @@ const mapStateToProps = state =>{
     announcements : state.announcements,
     posts: state.posts,
     feedbacks: state.feedbacks,
-    prayaanas: state.prayaanas
+    prayaanas: state.prayaanas,
+    pizadas: state.pizadas,
 
   }
 }
@@ -35,12 +37,14 @@ const mapDispatchToProps = (dispatch) =>({
   postAnnouncement: (title, message) =>
   dispatch(postAnnouncement(title, message)),
   postPost: (message, ) => dispatch(postPost(message,)),
+  postPizada: (topic, ) => dispatch(postPizada(topic,)),
   fetchToppers: () => {dispatch(fetchToppers())},
   fetchPlacements: () => {dispatch(fetchPlacements())},
   fetchPosts:() => {dispatch(fetchPosts())},
   fetchAnnouncements: () => {dispatch(fetchAnnouncements())},
   fetchPrayaana: () => { dispatch(fetchPrayaana())},
   fetchFeedback: () => { dispatch(fetchFeedback())},
+  fetchPizada: () => { dispatch(fetchPizada())},
   resetFeedbackForm: () => { dispatch(actions.reset('feedback')) },
   resetPrayaanaForm: () => { dispatch(actions.reset('prayaana')) },
   postFeedback: (firstname, lastname, telnum, email, agree, contactType, message) => dispatch(postFeedback(firstname, lastname, telnum, email, agree, contactType, message)),
@@ -57,6 +61,7 @@ class Main extends Component{
       this.props.fetchPosts();
       this.props.fetchFeedback();
       this.props.fetchPrayaana();
+      this.props.fetchPizada();
     }
 
   render(){
@@ -103,7 +108,8 @@ class Main extends Component{
               resetPrayaanaForm={this.props.resetPrayaanaForm}
               postPrayaana={this.props.postPrayaana}
             />} />
-            <Route exact path="/pizada" component={() => <Pizada />} />
+            <Route exact path="/pizada" component={() => <Pizada 
+                  postPizada={this.props.postPizada}/>} />
             <Route exact path="/newpost" component={() => <NewPost postPost={this.props.postPost}/>} />
             <Route path="/admin" component={() => 
               <Admin 
@@ -114,6 +120,8 @@ class Main extends Component{
                 feedback = {this.props.feedbacks}/>} />
             <Route exact path='/prayaanareg' component={()=><PrayaanaReg 
                 prayaana = {this.props.prayaanas}/>} />
+                  <Route exact path='/pizadareg' component={()=><PizadaReg 
+                pizada = {this.props.pizadas}/>} />
             <Redirect to="/home" />
           </Switch>
           <Footer />

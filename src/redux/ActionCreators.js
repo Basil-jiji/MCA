@@ -436,3 +436,89 @@ export const addPrayaanas = (prayaanas) => ({
     type: ActionTypes.ADD_PRAYAANAS,
     payload: prayaanas
 }) 
+
+//PIZADA
+
+export const addPizada = (pizada) =>({
+    type: ActionTypes.ADD_PIZADA,
+    payload: pizada
+
+});
+
+export const addPizadas = (pizadas) =>({
+    type: ActionTypes.ADD_PIZADAS,
+    payload: pizadas
+
+});
+
+export const postPizada = (topic) => (dispatch) =>{
+    const newPizada = {
+        topic: topic
+    }
+    newPizada.date = new Date().toISOString();
+
+    return fetch (baseUrl + 'pizada',
+    {
+        method: 'POST',
+        body: JSON.stringify(newPizada),
+        headers: {
+            'Content-type' : 'application/json'
+        },
+        credentials: 'same-origin'
+    })
+    .then(response => {
+        if(response.ok){
+            return response;
+        }
+        else{
+            var error = new Error('Error' + response.status + ': ' + response.statusText );
+            error.response = response;
+            throw error;
+        }
+    },
+    error => {
+        var errmess = new Error(error.message);
+        throw errmess; 
+    }
+    )
+    .then(response => response.json())
+    .then(response => dispatch(addPizada(response)))
+    .catch(error => {console.log('Post Pizada', error.message);
+        alert('Your Pizada File could not be posted\nError:' + error.message); })
+}
+
+export const fetchPizada = () => (dispatch) =>{
+    dispatch(pizadaLoading(true));
+
+    return fetch(baseUrl + 'pizada')
+    .then(response => {
+        //When an error comes of the server
+        if(response.ok){
+            return response;
+        }
+        else{
+            var error = new Error('Error' + response.status + ': ' + response.statusText );
+            error.response = response;
+            throw error;
+        }
+    },
+
+    //When nothing come out of the server
+    error => {
+        var errmess = new Error(error.message);
+        throw errmess; 
+    }
+    )
+    .then(response => response.json())
+    .then(pizadas => dispatch(addPizada(pizadas)))
+    .catch(error => dispatch(pizadaFailed(error.message)));
+}
+
+export const pizadaLoading = () => ({
+    type: ActionTypes.PIZADA_LOADING
+});
+
+export const pizadaFailed = (errmess) => ({
+    type: ActionTypes.PIZADA_FAILED,
+    payload: errmess
+});

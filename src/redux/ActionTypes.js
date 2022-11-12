@@ -24,4 +24,10 @@ export const ADD_PRAYAANAS = 'ADD_PRAYAANAS';
 export const PRAYAANA_LOADING = 'PRAYAANA_LOADING';
 export const PRAYAANA_FAILED = 'PRAYAANA_FAILED';
 
+export const ADD_PIZADA = 'ADD_PIZADA';
+export const ADD_PIZADAS = 'ADD_PIZADAS';
+export const PIZADA_LOADING = 'PIZADA_LOADING';
+export const PIZADA_FAILED = 'PIZADA_FAILED';
+
+
 
