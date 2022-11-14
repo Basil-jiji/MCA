@@ -40,7 +40,7 @@ class LoginMain extends Component{
                     </Nav>
                     <TabContent activeTab={this.state.activeTab}>
                     <TabPane tabId="1">
-                        { this.state.activeTab == 1 ? <Login /> : null }
+                        { this.state.activeTab == 1 ? <Login loginUser={this.props.loginUser}/> : null }
                     </TabPane>
                     <TabPane tabId="2">
                         { this.state.activeTab == 2 ? <SignUp /> : null }

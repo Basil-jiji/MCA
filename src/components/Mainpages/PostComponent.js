@@ -23,11 +23,7 @@ function RenderPostItem({post}){
                     </CardBody>
                     <CardFooter className="text-right text-muted small"><p>
                         &nbsp;
-                        {new Intl.DateTimeFormat('en-US', {
-                            year: 'numeric',
-                            month: 'long',
-                            day: '2-digit'
-                        }).format(new Date(post.date))}
+                        {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day:'2-digit'}).format(new Date(Date.parse(post.updatedAt)))}
                     </p></CardFooter>
         </Card>
     )

@@ -4,7 +4,8 @@ import {
   Label,
   Button,
   Row,
-  Col
+  Col,
+  Form
 } from "reactstrap";
 
 const required = (val) => val && val.length;
@@ -19,20 +20,20 @@ class Student extends Component{
         this.state = {
 
         }
-        this.handleStudentLogin = this.handleStudentLogin.bind(this);
+        // this.handleStudentLogin = this.handleStudentLogin.bind(this);
     }
 
-    handleStudentLogin(values){
-        console.log("Current State is : " + JSON.stringify(values));
-        alert("Current State is : " + JSON.stringify(values));
-    }
+    // handleStudentLogin(values){
+    //     console.log("Current State is : " + JSON.stringify(values));
+    //     alert("Current State is : " + JSON.stringify(values));
+    // }
 
     render(){
         return (
             <div className="container">
               <div className="row row-content">
                 <div className="col-12">
-                  <LocalForm onSubmit={(values) => this.handleStudentLogin(values)}>
+                  <Form>
                     <Row className="form-group">
                       <Label htmlFor="firstname" md={2}>First Name</Label>
                       <Col md={10}>
@@ -154,14 +155,14 @@ class Student extends Component{
                             }} />
                           </Col>
                         </Row>
-                    <Row className="form-group">
+                    {/* <Row className="form-group">
                         <Col md={{size:10, offset:2}}>
                             <Button type="submit"value="submit" color="primary">
                                 SignUp
                             </Button>
                         </Col>
-                    </Row>
-                  </LocalForm>
+                    </Row> */}
+                  </Form>
                 </div>
               </div>
             </div>

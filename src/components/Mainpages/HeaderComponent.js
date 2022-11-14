@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Navbar, NavbarBrand, NavItem, NavbarToggler, Nav, Collapse, Button, } from "reactstrap";
+import { Navbar, NavbarBrand, NavItem, NavbarToggler, Nav, Collapse, Button, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
 import { NavLink } from 'react-router-dom';
 
 
@@ -11,12 +11,19 @@ class Header extends Component{
                 isNavOpen : false
             };
             this.toggleNav = this.toggleNav.bind(this);
+            this.handleLogout = this.handleLogout.bind(this);
     }
 
     toggleNav(){
         this.setState({
             isNavOpen: !this.state.isNavOpen
         })
+    }
+
+
+
+    handleLogout() {
+        this.props.logoutUser();
     }
 
 
@@ -53,10 +60,55 @@ class Header extends Component{
                     <Nav className="ml-auto" navbar>
                     <Button outline color="success"  href="/prayaana"><span className='fa'></span> Prayaana</Button>
                     <NavItem>
-                            <NavLink className="nav-link" to="/login">
+                        {!this.props.auth.isAuthenticated ?                             <NavLink className="nav-link" to="/login">
                                 <span className="fa fa-sign-in fa-lg"></span> Login
-                            </NavLink>
-                        </NavItem>                        
+                                {this.props.auth.isFetching ?
+                                <span className="fa fa-spinner fa-pulse fa-fw"></span>                                
+                            : null}
+                             </NavLink>
+                             :
+                            <UncontrolledDropdown
+                                        className="me-2"
+                                        direction="down"
+                                    >
+                                        <DropdownToggle
+                                        caret
+                                        color="primary"
+                                        >
+                                        {this.props.auth.user.username}
+                                        </DropdownToggle>
+                                        <DropdownMenu>
+                                        <NavLink className="nav-link" to="/profile">
+                                        <DropdownItem>
+                                            Profile
+                                        </DropdownItem >
+                                        </NavLink>
+                                        <DropdownItem divider />
+                                        <NavLink className="nav-link" to="/myposts">
+                                        <DropdownItem>
+                                            My Posts
+                                        </DropdownItem>
+                                        </NavLink>
+                                        <DropdownItem divider />
+                                        <NavLink className="nav-link" to="/pizada">
+                                        <DropdownItem>
+                                            Pizada
+                                        </DropdownItem>
+                                        </NavLink>
+                                        <DropdownItem divider />
+                                        <NavLink className="nav-link" to="/logout">
+                                        <DropdownItem onClick={this.handleLogout}>
+                                            Logout
+                                            {this.props.auth.isFetching ? 
+                                            <span className="fa fa-spinner fa-pulse fa-fw"></span>
+                                            : null        
+                                        }
+                                        </DropdownItem>
+                                        </NavLink>
+                                        </DropdownMenu>
+                                    </UncontrolledDropdown>
+                                 }   
+                        </NavItem>   
                     </Nav>
                 </Collapse>
             </div>

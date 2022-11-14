@@ -12,12 +12,13 @@ import Prayaana from "./Prayaana/PrayaanaComponent";
 import { connect } from "react-redux";
 import LoginMain from "./Login/LoginMainComponent";
 import Pizada from "./Pizada/PizadaComponent";
-import { fetchToppers, fetchPlacements, fetchPosts, fetchAnnouncements, fetchPrayaana, fetchFeedback, fetchPizada, postAnnouncement, postFeedback, postPrayaana, postPost, postPizada } from "../redux/ActionCreators";
+import { fetchToppers, fetchPlacements, fetchPosts, fetchAnnouncements, fetchPrayaana, fetchFeedback, fetchPizada, postAnnouncement, postFeedback, postPrayaana, postPost, postPizada, loginUser, logoutUser, } from "../redux/ActionCreators";
 import Admin from "./Admin/AdminRouteComponent"
 import NewPost from "./NewPost/NewPostComponent";
 import Feedback from "./Feedback/FeedbackComponent";
 import PrayaanaReg from "./Prayaana/PrayaanaRegComponent";
 import PizadaReg from "./Pizada/PizadaRegComponent";
+import MyPosts from "./NewPost/MyPostComponent";
 
 
 const mapStateToProps = state =>{
@@ -29,6 +30,7 @@ const mapStateToProps = state =>{
     feedbacks: state.feedbacks,
     prayaanas: state.prayaanas,
     pizadas: state.pizadas,
+    auth: state.auth
 
   }
 }
@@ -48,7 +50,9 @@ const mapDispatchToProps = (dispatch) =>({
   resetFeedbackForm: () => { dispatch(actions.reset('feedback')) },
   resetPrayaanaForm: () => { dispatch(actions.reset('prayaana')) },
   postFeedback: (firstname, lastname, telnum, email, agree, contactType, message) => dispatch(postFeedback(firstname, lastname, telnum, email, agree, contactType, message)),
-  postPrayaana: (firstname, lastname, course, registerNumber, batch, collegeName, coding, quiz, gaming, treasure, email, phoneNumber) => dispatch(postPrayaana(firstname, lastname, course, registerNumber, batch, collegeName, coding, quiz, gaming, treasure, email, phoneNumber))
+  postPrayaana: (firstname, lastname, course, registerNumber, batch, collegeName, coding, quiz, gaming, treasure, email, phoneNumber) => dispatch(postPrayaana(firstname, lastname, course, registerNumber, batch, collegeName, coding, quiz, gaming, treasure, email, phoneNumber)),
+  loginUser: (creds) => dispatch(loginUser(creds)),
+  logoutUser: () => dispatch(logoutUser()),
 });
 
 
@@ -82,7 +86,8 @@ class Main extends Component{
 
     return (
       <div>
-          <Header />
+          <Header auth={this.props.auth}
+          logoutUser={this.props.logoutUser} />
           <Switch>
             <Route path="/home" component={Homepage} />
             <Route exact path="/announcements" component={() => 
@@ -102,7 +107,8 @@ class Main extends Component{
                 resetFeedbackForm={this.props.resetFeedbackForm}
                 postFeedback={this.props.postFeedback}
               />} />
-            <Route exact path="/login" component={() => <LoginMain />} />
+            <Route exact path="/login" component={() => <LoginMain 
+            loginUser={this.props.loginUser} />} />
             <Route exact path="/signup" component={() => <SignUp />} />
             <Route exact path="/prayaana" component={() => <Prayaana
               resetPrayaanaForm={this.props.resetPrayaanaForm}
@@ -120,8 +126,10 @@ class Main extends Component{
                 feedback = {this.props.feedbacks}/>} />
             <Route exact path='/prayaanareg' component={()=><PrayaanaReg 
                 prayaana = {this.props.prayaanas}/>} />
-                  <Route exact path='/pizadareg' component={()=><PizadaReg 
+            <Route exact path='/pizadareg' component={()=><PizadaReg 
                 pizada = {this.props.pizadas}/>} />
+            <Route exact path='/myposts' component={()=><MyPosts/>} />
+            {/* <Route exact path='/myposts' component={()=><MyPosts/>} /> */}
             <Redirect to="/home" />
           </Switch>
           <Footer />

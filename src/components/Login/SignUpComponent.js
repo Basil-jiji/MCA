@@ -3,6 +3,8 @@ import {
   Col,
   Row,
   Label,
+  Button,
+  Form
 } from "reactstrap";
 import Student from "./StudentSignUpComponent";
 import Staff from "./StaffSignUpComponent";
@@ -15,12 +17,19 @@ class SignUp extends Component {
     this.state = {
       accountType: "student",
     };
+    this.handleSignup = this.handleSignup.bind(this);
 
   }
 
   selectAccountType = (event) => {
     this.setState({ accountType: event.target.value });
   };
+
+  handleSignup(values){
+    console.log("Current State is : " + JSON.stringify(values));
+    alert("Current State is : " + JSON.stringify(values));
+
+    }
 
   render() {
     return (
@@ -29,6 +38,7 @@ class SignUp extends Component {
           <div className="row row-content">
             <div className="col-12">
                   <div className="col" >
+                  <Form onSubmit={(values) => this.handleSignup(values)}>
                   <Row className="form-group">
                           <Label htmlFor="accountType" md={2}>
                             Account Type
@@ -54,6 +64,15 @@ class SignUp extends Component {
                             <Student />
                           ) : null}
                         </Row>
+                        {/* Button  ivde venam kodukkan Staff/Studen SignUp nte*/}
+                        <Row className="form-group">
+                        <Col md={{size:10, offset:2}}>
+                            <Button type="submit"value="submit" color="primary">
+                                SignUp
+                            </Button>
+                        </Col>
+                    </Row>
+                    </Form>
                   </div>       
             </div>
           </div>

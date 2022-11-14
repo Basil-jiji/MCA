@@ -1,10 +1,12 @@
 import React, { Component } from "react";
-import { Control, LocalForm, Errors } from "react-redux-form";
 import {
   Row,
   Col,
   Label,
-  Button
+  Button,
+  Input,
+  Form,
+  FormGroup
 } from "reactstrap";
 
 const required = (val) => val && val.length;
@@ -15,7 +17,13 @@ class Login extends Component {
     this.state = {
 
     };
+    this.handleLogin = this.handleLogin.bind(this);
   } 
+
+  handleLogin(event) {
+    this.props.loginUser({username: this.username.value, password: this.password.value});
+    event.preventDefault();
+}
 
 
   render() {
@@ -27,58 +35,50 @@ class Login extends Component {
 
                       {/* Login Form Starts from here */}
 
-                        <LocalForm onSubmit={this.handleLogin}>
+                        <Form onSubmit={this.handleLogin}>
+                        <FormGroup>
                         <Row className="form-group">
                           <Label htmlFor="username" md={2}>Username</Label>
                           <Col md={12}>
-                          <Control.text
-                            model=".username"
+                          <Input
+                          type="text"
                             id="username"
                             name="username"
                             placeholder="Username"
-                            className="form-control"
-                            validators={{required}}
+                            innerRef={(input) => this.username = input}
                           />
-                          <Errors className="text-danger" model=".username" show="touched" 
-                              messages={{
-                                required: 'Required '
-                            }} />
                           </Col>
                         </Row>
-
+                        </FormGroup>
+                        <FormGroup>
                         <Row className="form-group">
                           <Label htmlFor="password" md={2}>Password</Label>
                           <Col md={12}>
-                          <Control.text
+                          <Input
                             type="password"
-                            model=".password"
                             id="password"
                             name="password"
                             placeholder="Password"
                             className="form-control"
-                            validators={{required}}
+                            innerRef={(input) => this.password = input} 
                           />
-                          <Errors className="text-danger" model=".password" show="touched" 
-                              messages={{
-                                required: 'Required'
-                            }} />
                           </Col>
                         </Row>
-
+                        </FormGroup>
+                        <FormGroup check>
                         <Row className="form-group">
                           <Col md={12}>
                             <div className="form-check">
                             <Label check>
-                            <Control.checkbox model=".remember"
-                              name="remember"
-                              className="form-check-input"
-                            />
-                            {' '}
+                            <Input type="checkbox" name="remember"
+                                    innerRef={(input) => this.remember = input}  />
+                            {/* {' '} */}
                             Remember Me
                           </Label>
                             </div>
                           </Col>
                         </Row>
+                        </FormGroup>
                         <Row className="form-group">
                         <Col md={2}>
                             <Button type="submit"value="submit" color="primary">
@@ -86,7 +86,7 @@ class Login extends Component {
                             </Button>
                         </Col>
                     </Row>
-                      </LocalForm>
+                      </Form>
                 </div>
               </div>
             </div>
